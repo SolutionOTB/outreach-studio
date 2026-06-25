@@ -158,6 +158,18 @@ h2.t{font-family:Sora,sans-serif;font-size:31px;letter-spacing:-.025em;margin:0 
  .uploadrow{flex-direction:column}.uploadrow .btn{width:100%}
 }
 @media(max-width:430px){.lstats{flex-wrap:wrap}.lstat{flex:1 1 44%}}
+
+@media(max-width:780px){
+ html,body{overflow-x:hidden;max-width:100%}
+ .bar{position:static}
+ .tabs{position:static;top:auto}
+ .wrap{overflow-x:hidden}
+ .eml,.card2,.post,.phone,table,img,svg{max-width:100%}
+ .designs{grid-template-columns:1fr}
+ .hero{flex-wrap:wrap}
+ .coi{grid-template-columns:1fr}
+ .drawer .dpan{width:100%}
+}
 </style></head><body>
 
 <div id="login" class="scr on"><div class="login">
@@ -211,7 +223,7 @@ h2.t{font-family:Sora,sans-serif;font-size:31px;letter-spacing:-.025em;margin:0 
   <div class="card" style="padding:22px;margin-bottom:18px">
    <div class="uploadrow" style="display:flex;gap:10px;margin-bottom:14px">
     <button class="btn" style="flex:1;justify-content:center" onclick="document.getElementById('file').click()">⬆️ Upload contacts</button>
-    <button class="btn ghost" id="pickBtn" style="flex:1;justify-content:center;display:none" onclick="pickContacts()">📇 Select from contacts</button>
+    <button class="btn ghost" id="pickBtn" style="flex:1;justify-content:center" onclick="pickContacts()">📇 Select from contacts</button>
    </div>
    <div class="dz" id="dz"><div style="font-weight:600;color:var(--ink);font-size:16px">Drop a CSV / Excel export here, or <label style="color:var(--blue);cursor:pointer;text-decoration:underline">browse<input id="file" type="file" accept=".csv,text/csv" style="display:none"></label></div><div class="help" style="margin-top:6px">Columns: First, Last, Email, Phone, Relationship, Social (; separated)</div><div style="margin-top:12px"><button class="btn ghost sm" onclick="loadSample()">Use sample data</button></div></div>
   </div>
@@ -344,7 +356,7 @@ function renderAccountTab(){var a=st.aesthetic;var chips=["personality","color",
  $("tabAccount").innerHTML='<div class="hero"><div class="a" style="width:54px;height:54px;border-radius:50%;background:'+grad()+';color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px">'+esc2((AGENT()[0]||"C"))+'</div><div><h2 class="t">Account &amp; preferences</h2><p class="lead" style="margin:0">'+esc2(AGENT())+' · go.tieronedirect.com/'+esc2(st.url||"chris")+'</p></div></div>'
  +'<div class="card" style="padding:22px;margin-bottom:18px;max-width:660px"><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><h3 style="margin:0;font-family:Sora,sans-serif;font-size:16px">Your design preferences</h3><button class="btn ghost sm" onclick="editDesign()">Edit design choices</button></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px">'+chips+'</div><div class="help" style="margin-top:12px">Saved to your account — these apply to every message you generate.</div></div>'
  +'<div class="card" style="padding:22px;max-width:660px"><h3 style="margin:0 0 6px;font-family:Sora,sans-serif;font-size:16px">Saved messages</h3><p class="help" style="margin:0">'+saved+' message'+(saved===1?"":"s")+' saved this session. Saved items are written to your Airtable library so you can reuse them.</p></div>';}
-function pickContacts(){if(!(navigator.contacts&&navigator.contacts.select)){toast("Contact picker isn’t supported here — use Upload");return;}navigator.contacts.select(["name","email","tel"],{multiple:true}).then(function(list){var n=0;(list||[]).forEach(function(p){var parts=((p.name&&p.name[0])||"").trim().split(/\s+/);var first=parts[0]||"",last=parts.slice(1).join(" ");var email=(p.email&&p.email[0])||"",phone=(p.tel&&p.tel[0])||"";if(!email&&!phone)return;if(!last)last="—";st.contacts.push({first:first||"Contact",last:last,email:email,phone:phone,rel:"",social:[],notes:""});n++;});renderContacts();toast(n+" contact"+(n===1?"":"s")+" added");}).catch(function(){});}
+function pickContacts(){if(!(navigator.contacts&&navigator.contacts.select)){toast("This browser can’t open contacts directly — use Upload, or open on Android Chrome");return;}navigator.contacts.select(["name","email","tel"],{multiple:true}).then(function(list){var n=0;(list||[]).forEach(function(p){var parts=((p.name&&p.name[0])||"").trim().split(/\s+/);var first=parts[0]||"",last=parts.slice(1).join(" ");var email=(p.email&&p.email[0])||"",phone=(p.tel&&p.tel[0])||"";if(!email&&!phone)return;if(!last)last="—";st.contacts.push({first:first||"Contact",last:last,email:email,phone:phone,rel:"",social:[],notes:""});n++;});renderContacts();toast(n+" contact"+(n===1?"":"s")+" added");}).catch(function(){});}
 function login(){$("login").classList.remove("on");$("app").classList.add("on");buildOpts();refreshIllos();loadDam();enhance();if(navigator.contacts&&navigator.contacts.select){var pb=$("pickBtn");if(pb)pb.style.display="";}loadPrefsRemote();}
 /* aesthetic gen — render an EMAIL sample */
 function genAesthetic(){var btn=$("genA");btn.disabled=true;btn.innerHTML='<span class="spin"></span> Designing…';setTimeout(function(){btn.disabled=false;btn.textContent="Regenerate";
