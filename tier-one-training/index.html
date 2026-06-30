@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meet Tier One — Field Force Pilot Training</title>
+<style>
+:root{
+  --aflac-blue:#00A7E1; --aflac-gray:#7D7D7D; --aflac-orange:#F89728; --aflac-red:#C41200;
+  --blue-700:#0089BA; --blue-600:#0098cf; --blue-50:#EAF7FC; --blue-100:#CFEEF8;
+  --orange-50:#FEF3E4; --green:#0F7A4D; --green-50:#E7F5EE;
+  --ink:#1D1D1F; --slate:#5B6B7B; --line:#E5EAEE; --bg:#FFFFFF; --bg-tint:#F5FAFD; --white:#FFFFFF;
+  --font-head:"Proxima Nova","Proxima Nova Rg","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Helvetica Neue",Arial,sans-serif;
+  --radius:16px; --shadow:0 1px 2px rgba(16,42,67,.06),0 10px 30px rgba(16,42,67,.08);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg-tint);line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.head{font-family:var(--font-head);font-weight:700;letter-spacing:-.01em;margin:0}
+img{display:block}
+button{font-family:inherit}
+
+/* Header */
+header.top{background:var(--aflac-blue);color:#fff;position:sticky;top:0;z-index:30}
+.topbar{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{height:30px}
+.brand .div{width:1px;height:26px;background:rgba(255,255,255,.45)}
+.brand .t{font-family:var(--font-head);font-weight:700;font-size:15px;line-height:1.05}
+.brand .s{font-size:11px;opacity:.92}
+.prog{flex:1;max-width:320px}
+.prog .bar{height:7px;background:rgba(255,255,255,.3);border-radius:999px;overflow:hidden}
+.prog .fill{height:100%;width:0;background:#fff;border-radius:999px;transition:width .4s ease}
+.prog .lbl{font-size:11px;opacity:.95;margin-top:5px;text-align:right;font-family:var(--font-head)}
+
+/* Stage */
+.stage{max-width:1000px;margin:26px auto;padding:0 22px 60px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:34px 38px;min-height:440px;position:relative}
+.eyebrow{font-family:var(--font-head);font-weight:700;text-transform:uppercase;letter-spacing:.13em;font-size:12px;color:var(--aflac-blue)}
+.card h1{font-size:30px;margin:8px 0 6px;color:var(--ink)}
+.card h2{font-size:24px;margin:6px 0 4px}
+.lead{color:var(--slate);font-size:16px;max-width:66ch}
+.body p{font-size:15.5px;margin:12px 0}
+.hl{color:var(--blue-700);font-weight:700}
+.tag-aflac{color:var(--aflac-blue);font-weight:700}
+
+/* Hero (intro) */
+.hero{background:linear-gradient(135deg,#00A7E1,#0089BA);color:#fff;border:none}
+.hero .eyebrow{color:#bfeeff}
+.hero h1{color:#fff;font-size:38px;max-width:18ch}
+.hero .lead{color:rgba(255,255,255,.92)}
+.hero .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pill{font-size:12px;font-family:var(--font-head);font-weight:700;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:7px 13px;color:#fff}
+
+/* Audio block */
+.vo{margin-top:22px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:14px 16px}
+.vo .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.vo .voice{font-family:var(--font-head);font-weight:700;font-size:13px}
+.vo audio{height:34px}
+.vo .pend{font-size:12px;background:var(--aflac-orange);color:#3a2400;font-weight:700;padding:4px 9px;border-radius:6px;font-family:var(--font-head)}
+.vo .script{margin-top:12px;font-size:13.5px;color:rgba(255,255,255,.95);line-height:1.6;max-height:0;overflow:hidden;transition:max-height .4s ease}
+.vo .script.open{max-height:600px}
+.vo .toggle{background:#fff;color:var(--blue-700);border:none;border-radius:999px;padding:6px 14px;font-weight:700;font-size:12px;cursor:pointer;font-family:var(--font-head)}
+
+/* generic icon */
+.ic{width:26px;height:26px;flex:0 0 26px}
+.ic-lg{width:40px;height:40px;flex:0 0 40px}
+
+/* columns / cards */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+@media(max-width:720px){.cols{grid-template-columns:1fr}}
+.mini{background:var(--bg-tint);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.mini h4{font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.mini ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--slate)}
+.mini li{margin:5px 0}
+.callout{background:var(--blue-50);border:1px solid var(--blue-100);border-radius:12px;padding:14px 16px;font-size:14.5px;margin-top:16px}
+.warn{background:var(--orange-50);border:1px solid #F4D7AE;border-radius:12px;padding:14px 16px;font-size:14.5px;margin-top:16px}
+.good{background:var(--green-50);border:1px solid #BFE3CF;border-radius:12px;padding:14px 16px;font-size:14.5px;margin-top:16px}
+
+/* family tree */
+.tree{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:18px}
+.tree .parent{background:var(--aflac-blue);color:#fff;border-radius:12px;padding:12px 22px;font-family:var(--font-head);font-weight:700;font-size:16px}
+.tree .kids{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.node{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 16px;cursor:pointer;text-align:center;transition:.2s;min-width:150px}
+.node .nm{font-family:var(--font-head);font-weight:700;font-size:14px}
+.node .role{font-size:12px;color:var(--slate);margin-top:6px;max-height:0;overflow:hidden;transition:max-height .3s}
+.node.open .role{max-height:80px}
+.node:hover{border-color:var(--blue-100)}
+.node.t1{border-color:var(--aflac-orange);box-shadow:0 0 0 3px var(--orange-50)}
+.node.t1 .nm{color:var(--blue-700)}
+
+/* sort game */
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.bin{background:var(--bg-tint);border:2px dashed var(--line);border-radius:12px;padding:12px;min-height:150px}
+.bin h4{font-size:13px;text-align:center;color:var(--slate);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.bin.over{border-color:var(--aflac-blue);background:var(--blue-50)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;justify-content:center}
+.chip-d{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;cursor:grab;box-shadow:var(--shadow);font-weight:600}
+.chip-d.placed{cursor:default;opacity:.95}
+.tok{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;margin:4px;font-weight:600}
+.tok.right{border-color:var(--green);background:var(--green-50)}
+.tok.wrong{border-color:var(--aflac-red);background:#FBE3DF}
+
+/* same/different + on-off + compliant toggles */
+.qrow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+.qrow .qt{font-size:14.5px;flex:1;min-width:200px}
+.qrow .opts{display:flex;gap:8px;flex:0 0 auto}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 18px;min-width:104px;text-align:center;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-head);color:var(--slate);transition:.15s}
+.opt:hover{border-color:var(--aflac-blue);color:var(--blue-700)}
+.opt.sel{border-color:var(--aflac-blue);color:var(--blue-700);background:var(--blue-50)}
+.opt.correct{border-color:var(--green);background:var(--green-50);color:var(--green)}
+.opt.incorrect{border-color:var(--aflac-red);background:#FBE3DF;color:var(--aflac-red)}
+.expl{font-size:13px;color:var(--slate);margin-top:8px;display:none}
+.expl.show{display:block}
+
+/* calculator */
+.calc{margin-top:18px;background:var(--bg-tint);border:1px solid var(--line);border-radius:14px;padding:20px 22px;text-align:center}
+.calc input[type=range]{width:80%;accent-color:var(--aflac-blue)}
+.calc .big{font-family:var(--font-head);font-weight:800;font-size:46px;color:var(--blue-700);margin:6px 0}
+.calc .sub{font-size:13px;color:var(--slate)}
+.calc .goal{margin-top:10px;font-size:13.5px}
+.fsrow{display:flex;justify-content:space-between;font-size:12.5px;font-family:var(--font-head);font-weight:700;color:var(--ink);margin-bottom:4px}
+.fsrow span:last-child{color:var(--slate);font-weight:600}
+.fsbar{height:11px;background:var(--line);border-radius:999px;overflow:hidden}
+.fsfill{height:100%;width:0;background:var(--aflac-blue);border-radius:999px;transition:width .35s}
+.fsfill.done{background:var(--green)}
+.calc input[type=number]{border:1px solid var(--line);border-radius:6px;padding:3px 5px;font-size:12px;margin-left:4px}
+.calc label{font-size:12px;color:var(--slate)}
+.gocheck-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:8px;font-size:14px;cursor:pointer;transition:.15s}
+.gocheck-item:hover{border-color:var(--aflac-blue)}
+.gocheck-item .box{font-weight:800;color:var(--slate);width:18px;text-align:center}
+.gocheck-item.done{background:var(--green-50);border-color:#bfe3cf}
+.gocheck-item.done .box{color:var(--green)}
+.lvo{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--blue-50);border:1px solid var(--blue-100);border-radius:12px;padding:9px 14px;margin:0 0 16px}
+.lvo-lbl{font-family:var(--font-head);font-weight:700;font-size:12.5px;color:var(--blue-700);white-space:nowrap}
+.lvo-au{height:34px;flex:1;min-width:220px}
+
+/* scenario / playbook steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+@media(max-width:720px){.steps{grid-template-columns:1fr 1fr}}
+.step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+.step .n{width:30px;height:30px;border-radius:50%;background:var(--blue-50);color:var(--blue-700);font-family:var(--font-head);font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.step h4{font-size:13.5px;margin-bottom:5px}
+.step p{font-size:12.5px;color:var(--slate);margin:0}
+
+/* quiz */
+.quiz .q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:14px}
+.quiz .q h4{font-size:15px;margin-bottom:10px}
+.quiz .a{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-size:14px;margin:7px 0;cursor:pointer}
+.quiz .a:hover{border-color:var(--blue-100)}
+.quiz .a.sel{border-color:var(--aflac-blue);background:var(--blue-50)}
+.quiz .a.correct{border-color:var(--green);background:var(--green-50)}
+.quiz .a.incorrect{border-color:var(--aflac-red);background:#FBE3DF}
+.score{font-family:var(--font-head);font-weight:800;font-size:30px;color:var(--blue-700);text-align:center;margin:8px 0}
+
+/* chat */
+.chat{display:flex;flex-direction:column;height:430px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px;background:#fff}
+.chat .log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:82%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.5}
+.msg.bot{background:var(--blue-50);border:1px solid var(--blue-100);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.me{background:var(--aflac-blue);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.bot .src{display:block;font-size:11px;color:var(--slate);margin-top:6px}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:var(--bg-tint)}
+.qchip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12.5px;cursor:pointer;font-weight:600}
+.qchip:hover{border-color:var(--aflac-blue);color:var(--blue-700)}
+.inbar{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
+.inbar input{flex:1;border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;font-size:14px;outline:none}
+.inbar input:focus{border-color:var(--aflac-blue)}
+.inbar button{background:var(--aflac-blue);color:#fff;border:none;border-radius:999px;padding:10px 18px;font-weight:700;cursor:pointer}
+
+/* nav */
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+.btn{font-family:var(--font-head);font-weight:700;font-size:15px;border-radius:999px;padding:12px 26px;border:2px solid transparent;cursor:pointer;background:var(--aflac-blue);color:#fff}
+.btn:hover{background:var(--blue-700)}
+.btn.ghost{background:transparent;color:var(--slate);border-color:var(--line)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.dots{display:flex;gap:7px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dot.active{background:var(--aflac-blue)}
+.dot.done{background:var(--blue-100)}
+
+footer{max-width:1000px;margin:0 auto;padding:0 22px 40px;font-size:11.5px;color:var(--slate)}
+.disc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topbar">
+    <div class="brand">
+      <img src="data:image/png;base64,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" alt="Aflac">
+      <div class="div"></div>
+      <div><div class="t">Tier One Pilot Training</div><div class="s">Field Force Orientation</div></div>
+    </div>
+    <div class="prog"><div class="bar"><div class="fill" id="fill"></div></div><div class="lbl" id="plbl">Step 1 of 10</div></div>
+  </div>
+</header>
+
+<div class="stage"><div id="card" class="card"></div>
+  <div class="nav">
+    <button class="btn ghost" id="back">&larr; Back</button>
+    <div class="dots" id="dots"></div>
+    <button class="btn" id="next">Continue &rarr;</button>
+  </div>
+</div>
+<footer><div class="disc" id="disc">
+  <strong>Training use only.</strong> Tier One health products are limited-benefit supplemental insurance — not major medical or ACA coverage. Confirm all benefit details in the current Tier One outline of coverage before quoting. Compliance content is illustrative and subject to Aflac compliance/legal approval and applicable state law. Pilot rules (lapse threshold, 90-day window) are pending final confirmation. Tier One Insurance Company is a subsidiary of Aflac Incorporated; in California, Tier One Life Insurance Company.
+</div></footer>
+
+<script>
+/* ---------- ICONS ---------- */
+const I = {
+  family:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5M15 20c0-2 1-3.5 3-3.5s3 1.5 3 3.5"/></svg>',
+  globe:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>',
+  phone:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18h4"/></svg>',
+  shield:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+  heart:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#C41200" stroke-width="2"><path d="M12 21s-7-4.5-9-9C1.5 8 4 4.5 7.5 5 10 5.3 12 8 12 8s2-2.7 4.5-3C20 4.5 22.5 8 21 12c-2 4.5-9 9-9 9z"/></svg>',
+  tooth:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><path d="M7 3c-2.5 0-4 2-4 5 0 4 1.5 5 2.5 9 .5 2 2.5 2 3-.5l1-4c.2-1 1.8-1 2 0l1 4c.5 2.5 2.5 2.5 3 .5C19.5 13 21 12 21 8c0-3-1.5-5-4-5-1.5 0-2.5.7-5 .7S8.5 3 7 3z"/></svg>',
+  link:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><path d="M9 15l6-6M10 6l1-1a4 4 0 016 6l-1 1M14 18l-1 1a4 4 0 01-6-6l1-1"/></svg>',
+  cash:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#0F7A4D" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>',
+  alert:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#F89728" stroke-width="2"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>',
+  check:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#0F7A4D" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg>',
+  doc:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg>',
+  gauge:'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#00A7E1" stroke-width="2"><path d="M4 18a8 8 0 1116 0"/><path d="M12 18l4-5"/></svg>'
+};
+
+/* ---------- DEMO VIDEO ---------- */
+const WORKER_BASE="https://pytbtuzeeguqgrhszmpr.functions.supabase.co/tieronechat"; // Supabase edge fn: /chat + /video
+const VIDEO_URL = WORKER_BASE ? WORKER_BASE.replace(/\/$/,'')+"/video" : "http://aflacclients.com/MicrositePDF/TierOne/Demo/SPandCSPSizzle.mp4";
+const SP_END=141;   // 2:21 — self-service / enrollment section ends here
+const CSP_START=142; // 2:22 — admin / CSP portal section begins
+function demoSeek(t,end){
+  const v=document.getElementById('demovid'); if(!v)return;
+  const stop=(typeof end==='number')?end:null;
+  v.ontimeupdate=()=>{ if(stop!=null && v.currentTime>=stop){ v.pause(); v.ontimeupdate=null; } };
+  try{ v.currentTime=t; v.play(); }catch(e){}
+}
+
+/* ---------- CHAT BACKEND ---------- */
+const CHAT_API = WORKER_BASE ? WORKER_BASE.replace(/\/$/,'')+"/chat" : ""; // derived from WORKER_BASE; empty = offline FAQ
+let CHAT_HISTORY=[];
+
+/* ---------- CONTENT (slides) ---------- */
+const steps = [
+/* 0 INTRO + VO */
+{type:'intro'},
+/* 1 Lesson 1 */
+{af:'l1', eyebrow:'The Big Picture', h:'Tier One is part of the Aflac family', lead:'When you place Tier One business, you’re still selling Aflac.',
+ html:`<div class="body"><p>Tier One Insurance Company is a <span class="hl">subsidiary of Aflac Incorporated</span> — one of the underwriting entities inside the Aflac family of insurers. Same parent company. Same brand behind the products. Tier One is simply the part of Aflac built for the <span class="hl">direct and digital channel</span>.</p></div>
+ <p class="note" style="color:var(--slate);font-size:13px">Tap each company to see its role:</p>
+ <div class="tree">
+   <div class="parent">Aflac Incorporated</div>
+   <div class="kids">
+     <div class="node" onclick="this.classList.toggle('open')"><div class="nm">Aflac (Columbus)</div><div class="role">American Family Life Assurance Co. — the worksite / payroll line.</div></div>
+     <div class="node" onclick="this.classList.toggle('open')"><div class="nm">Aflac New York</div><div class="role">Aflac’s New York underwriting entity.</div></div>
+     <div class="node" onclick="this.classList.toggle('open')"><div class="nm">CAIC</div><div class="role">Continental American — group products.</div></div>
+     <div class="node t1" onclick="this.classList.toggle('open')"><div class="nm">Tier One ★</div><div class="role">The direct & digital entity — the one in your hands for this pilot.</div></div>
+   </div>
+ </div>
+ <div class="callout">If a customer asks “who’s Tier One?” — your answer is easy and true: <strong>It’s Aflac. The part built to let you buy online, directly, on your own time.</strong></div>`},
+/* 2 Lesson 2 */
+{eyebrow:'Why It’s Different', af:'l2', h:'Built for a different market', lead:'Tier One was designed for direct and digital sales — not the worksite the field knows best.',
+ html:`<div class="cols">
+   <div class="mini"><h4>${I.family} Where the field has focused</h4><ul><li>Worksite: employer groups</li><li>Payroll-deduction enrollment</li><li>In person, at open enrollment</li></ul></div>
+   <div class="mini"><h4>${I.globe} What Tier One was built for</h4><ul><li>Direct sales to individuals</li><li>Digital-direct & embedded partnerships</li><li>Online, anytime, on any device</li></ul></div>
+ </div>
+ <div class="callout">The same platform Aflac’s partners use is now yours. Partners like <strong>USAA</strong> use Aflac’s technology to cross-sell coverage online — Tier One brings that same buy flow to your direct sales.</div>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Drag each item into the right column:</p>
+ <div class="sort" id="sortbins">
+   <div class="bin" data-bin="ws"><h4>Worksite</h4></div>
+   <div class="bin" data-bin="t1"><h4>Tier One</h4></div>
+ </div>
+ <div class="chips" id="sortchips"></div>
+ <div class="expl" id="sortexpl"></div>`},
+/* Live demo */
+{eyebrow:'Live Demo', h:'See it in action: the two Tier One portals', lead:'A quick walkthrough of both sides of the platform. Use the buttons to jump straight to either part.',
+ html:`<video id="demovid" controls preload="metadata" playsinline style="width:100%;max-height:420px;border-radius:12px;background:#000;border:1px solid var(--line)" src="${VIDEO_URL}"></video>
+ <p class="note" style="font-size:13px;color:var(--slate);margin:12px 0 6px">Jump to a section:</p>
+ <div style="display:flex;gap:10px;flex-wrap:wrap">
+   <button class="btn" style="font-size:14px;padding:10px 18px" onclick="demoSeek(0,SP_END)">&#9658;&nbsp; Enrollment / Self-Service Portal &middot; 0:00&ndash;2:21</button>
+   <button class="btn ghost" style="font-size:14px;padding:10px 18px;border-color:var(--aflac-blue);color:var(--blue-700)" onclick="demoSeek(CSP_START)">&#9658;&nbsp; Admin Portal (CSP) &middot; 2:22</button>
+ </div>
+ <div class="callout" style="margin-top:12px">Two views, one platform: the <strong>self-service portal</strong> is where your customer enrolls and manages their own coverage; the <strong>admin / CSP portal</strong> is the back-office view. The admin section begins at 2:22.</div>
+ <p class="note" style="font-size:12px;color:var(--slate);margin-top:8px">Video not loading here? Open it directly: <a href="${VIDEO_URL}#t=0,141" target="_blank" rel="noopener">Self-Service Portal (0:00&ndash;2:21)</a> &nbsp;·&nbsp; <a href="${VIDEO_URL}#t=142" target="_blank" rel="noopener">Admin Portal (CSP)</a>.</p>`},
+/* 3 Lesson 3 */
+{af:'l3', eyebrow:'Plan Designs', h:'Same categories, a few real differences', lead:'You already know most of this. The categories and the cash-benefit promise don’t change — a few details do.',
+ html:`<div class="cols">
+   <div class="mini"><h4>${I.check} What stays the same</h4><ul><li>Same lines: Accident, Cancer, Critical Illness, Dental</li><li>Cash paid directly to the policyholder</li><li><strong>Critical Illness = essentially the same plan</strong> (same 8 conditions; higher top face: $25K vs $20K)</li></ul></div>
+   <div class="mini"><h4>${I.alert} Specific to Tier One</h4><ul><li>Fixed <strong>Standard / Plus / Elite</strong> tiers (worksite grows benefits yearly)</li><li>Dental <strong>waiting periods</strong> (basic ~6 mo; major 9–12 mo)</li><li>Cancer screening & annual-care benefits are <strong>tier-based and lower</strong></li></ul></div>
+ </div>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Same or Different on Tier One? Tap your answer:</p>
+ <div id="sd"></div>`},
+/* 4 Lesson 4 */
+{af:'l4', eyebrow:'Important', h:'If they ask a product question, check the materials first', lead:'When a friend or family member asks something product-specific, review the Tier One brochures and materials before you answer.',
+ html:`<div class="steps" style="grid-template-columns:repeat(3,1fr)">
+   <div class="step"><div class="n">1</div><h4>Pause</h4><p>Don’t answer product specifics from memory — the amounts can differ.</p></div>
+   <div class="step"><div class="n">2</div><h4>Open the materials</h4><p>Pull up the Tier One brochure or outline of coverage.</p></div>
+   <div class="step"><div class="n">3</div><h4>Then answer</h4><p>Confirm it matches Tier One, then answer with confidence.</p></div>
+ </div>
+ <div class="mini" style="margin-top:18px"><h4>${I.doc} Scenario</h4><p style="font-size:14.5px;margin:0 0 10px">A friend asks what your dental covers for a crown. What’s your move?</p><div id="scen"></div></div>`},
+/* 5 Lesson 5 */
+{af:'l5', eyebrow:'The Pilot Playbook', h:'How you put Tier One to work — and get paid', lead:'You stay the trusted advisor; the platform handles the purchase and the credit.',
+ html:`<div class="steps">
+   <div class="step"><div class="n">1</div><h4>Promote & discuss</h4><p>Talk about Aflac and why protection matters.</p></div>
+   <div class="step"><div class="n">2</div><h4>Share your link</h4><p>Drop your personal QR / link where your people are.</p></div>
+   <div class="step"><div class="n">3</div><h4>They buy online</h4><p>Your COI completes the buy flow themselves.</p></div>
+   <div class="step"><div class="n">4</div><h4>It tracks to you</h4><p>Credits your writing number & 01 hierarchy.</p></div>
+ </div>
+ <div class="good"><strong>${I.cash.replace('class="ic"','class="ic" style="vertical-align:middle"')} The money:</strong> Full production credit (applied <em>manually</em> during the pilot) <strong>plus a one-time $250</strong> per issued policy, paid ~3 business days after issue. A policy issues when payment is collected (on the effective date).</div>
+ <div class="calc">
+   <div class="sub">Drag to see what your first month can produce</div>
+   <input type="range" id="calcr" min="0" max="20" value="10" oninput="calcUpd(this.value)">
+   <div style="display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:4px 0 2px">
+     <div><div class="big" id="calcv">$2,500</div><div class="sub"><span id="calcn">10</span> issued × $250 fast cash</div></div>
+     <div><div class="big" id="calccredit" style="color:var(--aflac-blue)">$4,000</div><div class="sub">est. annualized premium (AP)*</div></div>
+   </div>
+   <div style="text-align:left;margin-top:12px">
+     <div class="fsrow"><span>Fast Start &middot; $5,000 AP (first 4 wks)</span><span id="fsstat">80% there</span></div>
+     <div class="fsbar"><div class="fsfill" id="fsfill"></div></div>
+     <div class="fsrow" style="margin-top:10px"><span>Super Fast Start &middot; $15,000 AP (first 8 wks)</span><span id="sfsstat">27% there</span></div>
+     <div class="fsbar"><div class="fsfill" id="sfsfill"></div></div>
+   </div>
+   <div class="goal callout" style="margin-top:14px">Goal: <strong>10 apps in your first 30 days.</strong> Tier One production <strong>counts toward your Traditional AP</strong>, so it helps drive you toward <strong>Fast Start</strong> and <strong>Super Fast Start</strong> — and the new-associate bonuses they unlock.</div>
+   <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px">
+     <label>Avg AP / policy $<input type="number" id="calcap" value="400" min="0" style="width:62px" oninput="calcUpd(document.getElementById('calcr').value)"></label>
+     <label>Fast Start AP $<input type="number" id="calcfs" value="5000" min="0" style="width:72px" oninput="calcUpd(document.getElementById('calcr').value)"></label>
+     <label>Super FS AP $<input type="number" id="calcsfs" value="15000" min="0" style="width:72px" oninput="calcUpd(document.getElementById('calcr').value)"></label>
+   </div>
+   <p class="note" style="font-size:11px;margin-top:6px;color:var(--slate)">*Estimate. Fast Start $5,000 AP / Super Fast Start $15,000 AP are 2025 Triple Crown First-Year Series figures and may change — confirm current criteria on One Aflac. Avg AP/policy is an editable assumption.</p>
+ </div>`},
+/* 6 Lesson 6 */
+{af:'l6', eyebrow:'The Rules', h:'The rules that keep your link on', lead:'Because the pilot pays a flat bonus (not clawback-able commission), a few rules protect the program — and your link.',
+ html:`<div class="cols">
+   <div class="mini"><h4>${I.alert} 1 · Keep it on the books</h4><ul><li>If <strong>5+ policies lapse within 120 days</strong>, your link is turned off.</li><li>Fix: write real coverage to real people who’ll keep it.</li></ul></div>
+   <div class="mini"><h4>${I.alert} 2 · 90-day window</h4><ul><li>The pilot runs <strong>90 days</strong>; after that Aflac may turn links off.</li><li>Your link is a pilot privilege — make the most of it.</li></ul></div>
+ </div>
+ <div class="warn" style="margin-top:14px"><strong>3 · Abnormal claims / fraud:</strong> if claims activity looks abnormal or fraud is detected, Aflac may turn a link off <strong>pending review</strong> — protecting the integrity of the pilot for everyone.</div>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Could this turn a link off? Tap On / Off:</p>
+ <div id="onoff"></div>`},
+/* 7 Lesson 7 */
+{af:'l7', eyebrow:'Compliance', h:'How you talk about & market Tier One', lead:'Selling insurance is a privilege with rules — they protect your customers, your link, and your career.',
+ html:`<div class="cols">
+   <div class="mini"><h4>${I.shield} Always</h4><ul><li>Say it’s <strong>limited-benefit supplemental</strong> — not major medical/ACA</li><li>Use <strong>approved materials & your approved link</strong> only</li><li>Name the insurer truthfully (Tier One Insurance Company)</li><li>Sell only where you’re <strong>licensed & appointed</strong></li></ul></div>
+   <div class="mini"><h4>${I.alert} Never</h4><ul><li>Misrepresent or exaggerate benefits</li><li>Guarantee a claim will be paid</li><li>Offer cash/gifts to induce a sale (rebating)</li><li>Push a switch by disparaging existing coverage</li></ul></div>
+ </div>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Compliant or a violation? Tap to check:</p>
+ <div id="comp"></div>
+ <div class="warn"><strong>Heads up:</strong> these rules are modeled on standard state insurance regulation and are <strong>pending Aflac compliance/legal approval</strong> per state.</div>`},
+/* Get Started */
+{af:'get-started', eyebrow:'Get Started', h:'Ideas to get your first ten', lead:'You don’t need a big audience — just real conversations with people who already trust you. Here’s how associates hit ten apps in thirty days.',
+ html:`<div class="cols">
+   <div class="mini"><h4>${I.link} Put your link to work</h4><ul><li>Text your QR code to friends &amp; family</li><li>Add your link to your social bios &amp; email signature</li><li>Drop it in the group chats and community pages you’re already in</li></ul></div>
+   <div class="mini"><h4>${I.family} Tap your circle</h4><ul><li>Share with centers of influence: clubs, church, gym, alumni</li><li>Talk to local business owners you know</li><li>Ask happy customers to share your link</li></ul></div>
+ </div>
+ <div class="callout" style="margin-top:14px"><strong>Tell your story.</strong> The most persuasive thing you have is why <em>you</em> protect your own family. Post it, say it, mean it.</div>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:14px">Your starter checklist — tap to commit:</p>
+ <div id="gocheck"></div>`},
+/* 8 QUIZ */
+{type:'quiz'},
+/* 9 CHAT */
+{type:'chat'}
+];
+
+/* ---------- Lesson 1 VO script (Module 1) ---------- */
+const VO1 = `Welcome to the Tier One pilot. If you're hearing this, you're one of the first in the field force to ever put Tier One in your own hands — so let's get you ready to do it right. In the next fifteen minutes, you'll learn what Tier One is, how it's different from the worksite business you may know, how the pilot pays you, and the rules that keep your link switched on. ::: Here's the first thing to plant firmly: when you place Tier One business, you are still selling Aflac. Tier One Insurance Company is a subsidiary of Aflac Incorporated — one of the underwriting entities inside the Aflac family, alongside Aflac of Columbus, Aflac New York, and Continental American. Same parent. Same brand. Tier One is simply the part of Aflac built for the direct and digital channel. So if a customer asks who Tier One is, your answer is easy and true: it's Aflac — the part built to let you buy online, directly, on your own time.`;
+
+/* ---------- INTERACTION DATA ---------- */
+const sortItems=[{t:'Payroll deduction',b:'ws'},{t:'Buy online anytime',b:'t1'},{t:'Open enrollment window',b:'ws'},{t:'Personal QR / link',b:'t1'},{t:'Employer groups',b:'ws'},{t:'Direct to individuals',b:'t1'}];
+const sdItems=[
+ {q:'Critical Illness covers the same 8 conditions.',a:'Same',e:'Correct — CI is essentially the same plan; Tier One just offers a higher top face ($25K).'},
+ {q:'Tier One dental has no waiting period.',a:'Different',e:'Different — Tier One dental has waiting periods (basic ~6 mo, major 9–12 mo). The worksite PPO had none.'},
+ {q:'Benefits are paid as cash directly to the policyholder.',a:'Same',e:'Correct — the cash-benefit promise is identical across both lines.'},
+ {q:'Cancer screening & annual-care amounts match the worksite.',a:'Different',e:'Different — on Tier One they’re tier-based and generally lower.'},
+ {q:'Tier One uses fixed Standard/Plus/Elite tiers.',a:'Different',e:'Different vs. worksite — worksite grows certain benefits each year; Tier One locks them at the chosen tier.'}
+];
+const scenOpts=[
+ {t:'Answer from memory with the worksite figures',ok:false,e:'No — the amounts can differ. Don’t answer product specifics from memory.'},
+ {t:'Review the Tier One brochure / outline of coverage first, then answer',ok:true,e:'Yes — check the Tier One materials, then answer with confidence.'},
+ {t:'Tell them it’s the same as their old plan',ok:false,e:'No — that risks a misrepresentation.'}
+];
+const onoffItems=[
+ {q:'6 of your policies lapse for non-payment at day 90',a:'Turned off',e:'Turned off — 5 or more lapses within 120 days turns the link off.'},
+ {q:'You answer a customer’s question about coverage',a:'Stays on',e:'Stays on — advising and answering questions is exactly your role.'},
+ {q:'The 90-day pilot window ends',a:'Turned off',e:'Turned off — Aflac may turn links off when the pilot window closes.'},
+ {q:'Claims activity on your sales looks abnormal',a:'Turned off',e:'Turned off (pending review) — Aflac may pause a link while it reviews.'}
+];
+const compItems=[
+ {q:'“This replaces your health insurance — cancel your plan!”',a:'Violation',e:'Violation — it’s supplemental, never a substitute for major medical.'},
+ {q:'Sharing your approved link with the supplemental disclosure intact',a:'Compliant',e:'Compliant — approved materials + required disclosure.'},
+ {q:'Editing the benefit numbers in a screenshot to look better',a:'Violation',e:'Violation — altering figures is misrepresentation + unapproved advertising.'},
+ {q:'“I guarantee your claim will be paid.”',a:'Violation',e:'Violation — never guarantee a claim; benefits pay per policy terms.'},
+ {q:'Soliciting a friend in a state where you’re not licensed',a:'Violation',e:'Violation — only sell where you’re licensed & appointed.'}
+];
+const quizQs=[
+ {q:'Tier One is best described as:',opts:['A competitor to Aflac','A subsidiary of Aflac Incorporated, built for direct/digital','A worksite payroll product','An ACA major-medical plan'],c:1},
+ {q:'The cleanest dividing line vs. the worksite line is:',opts:['Underwriting entity + distribution channel','Price only','Brand','The cash-benefit promise'],c:0},
+ {q:'Which product is essentially the same design on both lines?',opts:['Dental','Accident','Critical Illness','Cancer'],c:2},
+ {q:'A friend asks a product-specific question. You should:',opts:['Answer from memory','Review the Tier One brochures/materials first, then answer','Use the worksite figures','Say it’s the same as the worksite plan'],c:1},
+ {q:'Per issued policy during the pilot (beyond credit), you get:',opts:['A clawback-able commission','Nothing extra','A one-time $250, ~3 business days after issue','A percentage of premium'],c:2},
+ {q:'Which can turn a link off? (best answer)',opts:['Answering a coverage question','5+ policies lapsing within 120 days','Sharing your approved link','Telling your true story'],c:1},
+ {q:'Which is compliant when marketing your link?',opts:['“This replaces your health insurance”','Editing benefit figures','Sharing your approved link with the supplemental disclosure','Soliciting where you’re not licensed'],c:2},
+ {q:'A friend says “guarantee my claim and I’ll sign up.” You:',opts:['Guarantee it to close','Explain you can’t guarantee claims; point to the outline of coverage','Offer them $50','Call it major medical'],c:1}
+];
+
+/* ---------- CHAT KB ---------- */
+const KB=[
+ {k:['critical illness','ci','same plan','8 conditions'],a:'Critical Illness is essentially the same plan on both lines — same 8 covered conditions and the 50% subsequent-event benefit. Tier One offers a higher top face amount ($25,000 vs. $20,000). Sell it with confidence.',s:'Comparison summary · Plan validation'},
+ {k:['dental','waiting','crown','tooth'],a:'Tier One dental has waiting periods — about 6 months on basic services and 9–12 months on major services; preventive is day-one. The worksite PPO had no waiting period, so flag the waits up front and confirm the exact figure in the outline of coverage.',s:'Plan validation'},
+ {k:['cancer','screening','annual care'],a:'Same cancer categories, but several Tier One benefits are tier-based and lower than the worksite (e.g., screening $25/$75/$100 vs. flat $75; annual care $100/$200/$300 vs. $500). Quote from the Tier One tier.',s:'Plan validation'},
+ {k:['tier','standard','plus','elite','building'],a:'Tier One uses fixed Standard / Plus / Elite tiers — benefit amounts are set by the tier chosen at issue. The worksite line instead grows certain benefits each year (the Building Benefit).',s:'Plan validation'},
+ {k:['link','qr','turn off','shut off','lapse','120'],a:'Your link can be turned off if 5+ policies lapse within the first 120 days, when the 90-day pilot window ends, or if claims look abnormal / fraud is detected (pending review). Keep business honest and on the books and your link stays on.',s:'Pilot rules'},
+ {k:['paid','250','bonus','money','credit','commission'],a:'You get full production credit (applied manually during the pilot) plus a one-time $250 per issued policy, paid within ~3 business days. A policy issues when payment is collected on the effective date.',s:'Intro deck v10 · FastTrack'},
+ {k:['how','work','playbook','sell','buy flow'],a:'Four steps: promote & discuss, share your QR/link, your contact buys online themselves (no agent-entry), and it credits your writing number + 01 hierarchy. You’re the advisor; the platform handles the purchase.',s:'Intro deck v10'},
+ {k:['compliant','market','advertis','social','rules say'],a:'Use approved materials and your approved link only — social posts, texts and bios all count as advertising. Always disclose it’s supplemental, never guarantee claims, no rebating, and only sell where you’re licensed. (Compliance content pending Aflac legal approval.)',s:'Compliance rules'},
+ {k:['supplemental','major medical','aca','replace'],a:'All Tier One health products are limited-benefit supplemental insurance — not major medical, not minimum essential coverage, and not a substitute for ACA coverage. Never imply otherwise.',s:'Comparison summary'},
+ {k:['what is tier one','who is tier one','family','subsidiary','aflac'],a:'Tier One is Aflac — Tier One Insurance Company is a subsidiary of Aflac Incorporated, the part of Aflac built for the direct and digital channel. In California it’s Tier One Life Insurance Company.',s:'Comparison summary · Intro deck'},
+ {k:['goal','10 apps','30 days'],a:'Your pilot goal is 10 apps in your first 30 days — at $250 each that’s $2,500 of fast cash while you’re learning the business.',s:'Intro deck v10'}
+];
+
+/* ---------- ENGINE ---------- */
+let cur=0;
+const card=document.getElementById('card');
+function render(){
+  const s=steps[cur];
+  if(s.type==='intro') card.innerHTML=introHTML();
+  else if(s.type==='quiz') card.innerHTML=quizHTML();
+  else if(s.type==='chat') card.innerHTML=chatHTML();
+  else card.innerHTML=`<div class="eyebrow">${s.eyebrow}</div><h1>${s.h}</h1><p class="lead">${s.lead}</p>${s.af?voBar(s.af):''}${s.html}`;
+  card.classList.toggle('hero', s.type==='intro');
+  // progress
+  document.getElementById('fill').style.width=((cur)/(steps.length-1)*100)+'%';
+  document.getElementById('plbl').textContent=`Step ${cur+1} of ${steps.length}`;
+  document.getElementById('back').disabled=cur===0;
+  document.getElementById('next').style.visibility=cur===steps.length-1?'hidden':'visible';
+  const dots=document.getElementById('dots');dots.innerHTML='';
+  steps.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===cur?' active':(i<cur?' done':''));dots.appendChild(d);});
+  // wire interactions by container presence (position-independent)
+  if(document.getElementById('sortbins')) initSort();
+  if(document.getElementById('sd')) initToggle('sd',sdItems,['Same','Different']);
+  if(document.getElementById('scen')) initScen();
+  if(document.getElementById('calcr')) calcUpd(10);
+  if(document.getElementById('onoff')) initToggle('onoff',onoffItems,['Stays on','Turned off']);
+  if(document.getElementById('comp')) initToggle('comp',compItems,['Compliant','Violation']);
+  if(document.getElementById('gocheck')) initGo();
+  if(s.type==='chat') initChat();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function introHTML(){
+ return `<div class="eyebrow">Field Force Pilot · Module 1</div>
+ <h1>Meet Tier One</h1>
+ <p class="lead">Part of the Aflac family of insurers — built for direct and digital sales. A field-force orientation for the Tier One pilot.</p>
+ <div class="pills"><span class="pill">~15–20 min</span><span class="pill">7 lessons + live demo</span><span class="pill">Quiz + live Q&amp;A</span></div>
+ <div class="vo">
+   <div class="row">
+     <span class="voice">🎙 Voiceover · Abigail</span>
+     <span class="pend" id="vopend">Audio render pending</span>
+     <audio id="vo1" controls preload="auto" src="audio/cold-open.mp3" style="display:none" onloadeddata="this.style.display='inline-block';document.getElementById('vopend').style.display='none'"></audio>
+     <button class="toggle" onclick="document.getElementById('vos').classList.toggle('open')">Show narration</button>
+   </div>
+   <div class="script" id="vos">Welcome to the Tier One pilot. If you're hearing this, you're one of the first people in the field force to put Tier One to work, so let's get you ready to do it well.<br><br>Here's the plan for the next twenty minutes or so. We'll cover what Tier One is, the few real differences from the worksite business you already know, how the pilot works and how it pays you, the rules that keep your link active, and how to stay compliant. At the end there's a chat assistant you can ask anything. Let's get started.</div>
+ </div>`;
+}
+/* sort */
+function initSort(){
+ const wrap=document.getElementById('sortchips');
+ sortItems.forEach((it,i)=>{const c=document.createElement('div');c.className='chip-d';c.draggable=true;c.textContent=it.t;c.dataset.bin=it.b;c.id='sc'+i;
+   c.addEventListener('dragstart',e=>e.dataTransfer.setData('id',c.id));wrap.appendChild(c);});
+ document.querySelectorAll('#sortbins .bin').forEach(b=>{
+   b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('over');});
+   b.addEventListener('dragleave',()=>b.classList.remove('over'));
+   b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('over');
+     const el=document.getElementById(e.dataTransfer.getData('id'));
+     const ok=el.dataset.bin===b.dataset.bin;el.classList.add('placed');
+     el.style.borderColor=ok?'var(--green)':'var(--aflac-red)';el.style.background=ok?'var(--green-50)':'#FBE3DF';
+     b.appendChild(el);checkSort();});
+ });
+}
+function checkSort(){
+ const placed=document.querySelectorAll('.chip-d.placed').length;
+ if(placed===sortItems.length){const ex=document.getElementById('sortexpl');ex.className='expl show';
+   const right=[...document.querySelectorAll('.chip-d')].filter(c=>c.parentElement.dataset.bin===c.dataset.bin).length;
+   ex.innerHTML=`<strong>${right}/${sortItems.length} correct.</strong> Worksite = employer/payroll/in-person; Tier One = individual/online/your personal link.`;}
+}
+/* generic toggle (same-different, on-off, compliant) */
+function initToggle(id,items,labels){
+ const host=document.getElementById(id);host.innerHTML='';
+ items.forEach((it,i)=>{
+   const row=document.createElement('div');row.className='qrow';
+   row.innerHTML=`<div class="qt">${it.q}</div><div class="opts">${labels.map(l=>`<button class="opt">${l}</button>`).join('')}</div>`;
+   const ex=document.createElement('div');ex.className='expl';ex.textContent=it.e;
+   row.querySelectorAll('.opt').forEach(btn=>btn.addEventListener('click',()=>{
+     row.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
+     const correct=btn.textContent===it.a;
+     btn.classList.add(correct?'correct':'incorrect');
+     if(!correct){row.querySelectorAll('.opt').forEach(b=>{if(b.textContent===it.a)b.classList.add('correct');});}
+     ex.className='expl show';
+   }));
+   host.appendChild(row);host.appendChild(ex);
+ });
+}
+/* scenario */
+function initScen(){
+ const host=document.getElementById('scen');host.innerHTML='';
+ scenOpts.forEach(o=>{const b=document.createElement('button');b.className='a';b.textContent=o.t;
+   b.addEventListener('click',()=>{host.querySelectorAll('.a').forEach(x=>x.style.pointerEvents='none');
+     b.classList.add(o.ok?'correct':'incorrect');
+     if(!o.ok)host.querySelectorAll('.a').forEach(x=>{if(scenOpts.find(z=>z.t===x.textContent).ok)x.classList.add('correct');});
+     const e=document.createElement('div');e.className='expl show';e.textContent=o.e;host.appendChild(e);});
+   host.appendChild(b);});
+}
+/* calculator */
+function calcUpd(v){
+ v=+v;
+ const cv=document.getElementById('calcv'); if(!cv) return;
+ const ap=+(document.getElementById('calcap')?.value||400);
+ const fs=+(document.getElementById('calcfs')?.value||5000);
+ const sfs=+(document.getElementById('calcsfs')?.value||15000);
+ const cash=v*250, credit=v*ap;
+ cv.textContent='$'+cash.toLocaleString();
+ document.getElementById('calcn').textContent=v;
+ document.getElementById('calccredit').textContent='$'+credit.toLocaleString();
+ document.getElementById('calcr').value=v;
+ const setBar=(fillId,statId,thr)=>{
+   const fill=document.getElementById(fillId); if(!fill) return;
+   const pct=thr>0?Math.min(100,Math.round(credit/thr*100)):0;
+   fill.style.width=pct+'%';
+   fill.classList.toggle('done',credit>=thr && thr>0);
+   document.getElementById(statId).textContent = (thr>0 && credit>=thr) ? '✓ qualified' : pct+'% there';
+ };
+ setBar('fsfill','fsstat',fs);
+ setBar('sfsfill','sfsstat',sfs);
+}
+/* per-lesson voiceover bar */
+function voBar(key){return `<div class="lvo"><span class="lvo-lbl">🎧 Voiceover · Abigail</span><audio class="lvo-au" controls preload="none" src="audio/${key}.mp3"></audio></div>`;}
+/* get-started checklist */
+const goItems=['Text my QR code to 10 friends/family','Add my link to my social bios','Add my link to my email signature','Pick 3 centers of influence to share with this week','Post my “why I protect my family” story'];
+function initGo(){const h=document.getElementById('gocheck'); if(!h) return; h.innerHTML=''; goItems.forEach(t=>{const d=document.createElement('div'); d.className='gocheck-item'; d.innerHTML='<span class="box">○</span><span>'+t+'</span>'; d.onclick=()=>{d.classList.toggle('done'); d.querySelector('.box').textContent=d.classList.contains('done')?'✓':'○';}; h.appendChild(d);});}
+/* quiz */
+let quizState=[];
+function quizHTML(){
+ quizState=new Array(quizQs.length).fill(null);
+ return `<div class="eyebrow">Knowledge Check</div><h1>Final quiz</h1><p class="lead">Eight quick questions — 80% to pass. You’ll see the answer as you go.</p>
+ <div class="quiz" id="quiz">${quizQs.map((q,i)=>`<div class="q"><h4>${i+1}. ${q.q}</h4>${q.opts.map((o,j)=>`<button class="a" data-q="${i}" data-o="${j}">${o}</button>`).join('')}</div>`).join('')}</div>
+ <div id="qresult"></div>`;
+}
+/* chat */
+function chatHTML(){
+ return `<div class="eyebrow">Ask Anything</div><h1>Tier One Q&amp;A</h1><p class="lead">Ask about Tier One vs. Aflac products, how the pilot works, or the rules.</p>
+ <div class="chat">
+   <div class="log" id="clog"></div>
+   <div class="chips-row" id="cchips"></div>
+   <div class="inbar"><input id="cin" placeholder="Type your question…" onkeydown="if(event.key==='Enter')chatSend()"><button onclick="chatSend()">Send</button></div>
+ </div>`;
+}
+function initChat(){
+ const log=document.getElementById('clog');
+ botSay('Hi! I’m your Tier One assistant. I cover Tier One vs. the Aflac products and how this pilot works — and I’ll always point you to the official policy documentation to confirm specifics. Ask me anything in that scope, or tap a question below.');
+ const chips=['Is Critical Illness the same as what I sell now?','What can turn my link off?','How and when do I get paid?','Does Tier One dental have a waiting period?'];
+ const cc=document.getElementById('cchips');chips.forEach(c=>{const b=document.createElement('button');b.className='qchip';b.textContent=c;b.onclick=()=>{document.getElementById('cin').value=c;chatSend();};cc.appendChild(b);});
+}
+function botSay(t,src){const log=document.getElementById('clog');const m=document.createElement('div');m.className='msg bot';m.innerHTML=t+(src?`<span class="src">Source: ${src}</span>`:'');log.appendChild(m);log.scrollTop=log.scrollHeight;}
+function meSay(t){const log=document.getElementById('clog');const m=document.createElement('div');m.className='msg me';m.textContent=t;log.appendChild(m);log.scrollTop=log.scrollHeight;}
+async function chatSend(){const inp=document.getElementById('cin');const q=inp.value.trim();if(!q)return;meSay(q);inp.value='';
+ CHAT_HISTORY.push({role:'user',content:q});
+ if(CHAT_API){
+   const log=document.getElementById('clog');const typing=document.createElement('div');typing.className='msg bot';typing.textContent='…';log.appendChild(typing);log.scrollTop=log.scrollHeight;
+   try{
+     const r=await fetch(CHAT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:CHAT_HISTORY})});
+     const d=await r.json();typing.remove();
+     if(d.reply){CHAT_HISTORY.push({role:'assistant',content:d.reply});botSay(d.reply.replace(/\n/g,'<br>'));}
+     else botSay(d.error?('Sorry — '+d.error):'Something went wrong. Always confirm details in the Tier One policy documentation.');
+   }catch(e){typing.remove();botSay('I couldn’t reach the assistant just now. Please try again, and always confirm specifics in the Tier One policy documentation.');}
+   return;
+ }
+ const ql=q.toLowerCase();let best=null,score=0;
+ KB.forEach(e=>{const sc=e.k.reduce((a,k)=>a+(ql.includes(k)?1:0),0);if(sc>score){score=sc;best=e;}});
+ setTimeout(()=>{ if(best&&score>0){botSay(best.a+' <em>Always confirm specifics in the Tier One policy documentation.</em>',best.s);} else {botSay('I only cover Tier One vs. Aflac products, how the pilot works, and the rules. For any specific benefit, always confirm in the Tier One policy documentation.');} },300);
+}
+/* quiz click delegation */
+document.addEventListener('click',e=>{
+ if(e.target.classList.contains('a')&&e.target.dataset.q!==undefined&&steps[cur].type==='quiz'){
+   const qi=+e.target.dataset.q,oi=+e.target.dataset.o;if(quizState[qi]!==null)return;quizState[qi]=oi;
+   const qDiv=e.target.closest('.q');const c=quizQs[qi].c;
+   qDiv.querySelectorAll('.a').forEach(b=>{b.style.pointerEvents='none';const j=+b.dataset.o;if(j===c)b.classList.add('correct');else if(j===oi)b.classList.add('incorrect');});
+   if(quizState.every(x=>x!==null)){const right=quizState.filter((o,i)=>o===quizQs[i].c).length;const pct=Math.round(right/quizQs.length*100);
+     const r=document.getElementById('qresult');r.innerHTML=`<div class="score">${right}/${quizQs.length} · ${pct}%</div><div class="${pct>=80?'good':'warn'}" style="text-align:center">${pct>=80?'Nice work — you’re ready. Head to the Q&A to ask anything else.':'Close — review the lessons you missed, then try the Q&A below.'}</div>`;
+     r.scrollIntoView({behavior:'smooth'});}
+ }
+});
+document.getElementById('next').addEventListener('click',()=>{if(cur<steps.length-1){cur++;render();}});
+document.getElementById('back').addEventListener('click',()=>{if(cur>0){cur--;render();}});
+render();
+</script>
+</body>
+</html>
