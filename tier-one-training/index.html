@@ -59,7 +59,7 @@ header.top{background:var(--aflac-blue);color:#fff;position:sticky;top:0;z-index
 .vo audio{height:34px}
 .vo .pend{font-size:12px;background:var(--aflac-orange);color:#3a2400;font-weight:700;padding:4px 9px;border-radius:6px;font-family:var(--font-head)}
 .vo .script{margin-top:12px;font-size:13.5px;color:rgba(255,255,255,.95);line-height:1.6;max-height:0;overflow:hidden;transition:max-height .4s ease}
-.vo .script.open{max-height:600px}
+.vo .script.open{max-height:1400px}
 .vo .toggle{background:#fff;color:var(--blue-700);border:none;border-radius:999px;padding:6px 14px;font-weight:700;font-size:12px;cursor:pointer;font-family:var(--font-head)}
 
 /* generic icon */
@@ -70,6 +70,8 @@ header.top{background:var(--aflac-blue);color:#fff;position:sticky;top:0;z-index
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
 @media(max-width:720px){.cols{grid-template-columns:1fr}}
 .mini{background:var(--bg-tint);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.mini.win{background:var(--green-50);border-color:#BFE3CF}
+.mini.watch{background:var(--orange-50);border-color:#F4D7AE}
 .mini h4{font-size:14px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .mini ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--slate)}
 .mini li{margin:5px 0}
@@ -97,6 +99,8 @@ header.top{background:var(--aflac-blue);color:#fff;position:sticky;top:0;z-index
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;justify-content:center}
 .chip-d{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;cursor:grab;box-shadow:var(--shadow);font-weight:600}
 .chip-d.placed{cursor:default;opacity:.95}
+.chip-d.picked{border-color:var(--aflac-blue);background:var(--blue-50);box-shadow:0 0 0 3px var(--blue-100)}
+.bin.armed{border-color:var(--aflac-blue);background:var(--blue-50)}
 .tok{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;margin:4px;font-weight:600}
 .tok.right{border-color:var(--green);background:var(--green-50)}
 .tok.wrong{border-color:var(--aflac-red);background:#FBE3DF}
@@ -146,11 +150,13 @@ header.top{background:var(--aflac-blue);color:#fff;position:sticky;top:0;z-index
 /* quiz */
 .quiz .q{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:14px}
 .quiz .q h4{font-size:15px;margin-bottom:10px}
-.quiz .a{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-size:14px;margin:7px 0;cursor:pointer}
-.quiz .a:hover{border-color:var(--blue-100)}
-.quiz .a.sel{border-color:var(--aflac-blue);background:var(--blue-50)}
-.quiz .a.correct{border-color:var(--green);background:var(--green-50)}
-.quiz .a.incorrect{border-color:var(--aflac-red);background:#FBE3DF}
+.quiz .a,#scen .a{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-size:14px;margin:7px 0;cursor:pointer;font-family:inherit;color:var(--ink)}
+.quiz .a:hover,#scen .a:hover{border-color:var(--blue-100)}
+.quiz .a.sel,#scen .a.sel{border-color:var(--aflac-blue);background:var(--blue-50)}
+.quiz .a.correct,#scen .a.correct{border-color:var(--green);background:var(--green-50)}
+.quiz .a.incorrect,#scen .a.incorrect{border-color:var(--aflac-red);background:#FBE3DF}
+.quiz .a:disabled,#scen .a:disabled{opacity:1}
+.dot{cursor:pointer}
 .score{font-family:var(--font-head);font-weight:800;font-size:30px;color:var(--blue-700);text-align:center;margin:8px 0}
 
 /* chat */
@@ -179,6 +185,42 @@ header.top{background:var(--aflac-blue);color:#fff;position:sticky;top:0;z-index
 .dot.active{background:var(--aflac-blue)}
 .dot.done{background:var(--blue-100)}
 
+/* product comparison accordion */
+.acc{margin-top:16px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.acc + .acc{margin-top:10px}
+.acc>button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:none;padding:13px 16px;cursor:pointer;font-family:var(--font-head);font-weight:700;font-size:14.5px;color:var(--blue-700);text-align:left}
+.acc>button:hover{background:var(--blue-50)}
+.acc>button .cnt{font-family:var(--font-body);font-weight:600;font-size:12px;color:var(--slate)}
+.acc .panel{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.acc.open .panel{max-height:1600px}
+.acc table{width:100%;border-collapse:collapse;font-size:13px}
+.acc th{background:var(--bg-tint);color:var(--slate);font-family:var(--font-head);font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;padding:8px 12px;text-align:left;border-top:1px solid var(--line)}
+.acc td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+.acc td:first-child{font-weight:600;width:30%}
+.acc tr.up td:last-child{background:var(--green-50);color:#0B5C3B}
+.acc tr.down td:last-child{background:var(--orange-50);color:#7A4E10}
+.acc tr.none td:last-child{background:#FBE3DF;color:#8A1A0C;font-weight:700}
+.srcnote{font-size:12px;color:var(--slate);background:var(--bg-tint);border:1px dashed var(--line);border-radius:10px;padding:11px 14px;margin-top:12px;line-height:1.6}
+/* materials */
+.matbtn{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.42);color:#fff;font-family:var(--font-head);font-weight:700;font-size:12.5px;border-radius:999px;padding:8px 15px;cursor:pointer;white-space:nowrap}
+.matbtn:hover{background:rgba(255,255,255,.3)}
+.modal{position:fixed;inset:0;background:rgba(16,42,67,.55);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
+.modal.open{display:flex}
+.modal .sheet{background:#fff;border-radius:var(--radius);max-width:660px;width:100%;max-height:84vh;overflow-y:auto;padding:26px 28px;box-shadow:var(--shadow)}
+.matitem{display:block;border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-top:10px;text-decoration:none;color:inherit}
+a.matitem:hover{border-color:var(--aflac-blue);background:var(--blue-50)}
+.matitem .mt{font-family:var(--font-head);font-weight:700;font-size:14.5px;color:var(--blue-700)}
+.matitem .md{font-size:13px;color:var(--slate);margin-top:4px}
+.matitem.pending{background:var(--bg-tint)}
+.matitem.pending .mt{color:var(--slate)}
+.pendchip{font-size:11px;font-family:var(--font-head);font-weight:700;background:var(--orange-50);border:1px solid #F4D7AE;color:#7A4E10;border-radius:999px;padding:2px 9px;margin-left:8px;white-space:nowrap}
+/* transcripts */
+.tx{max-height:0;overflow:hidden;transition:max-height .45s ease;font-size:14px;color:var(--slate);line-height:1.66;border-left:3px solid var(--blue-100);padding-left:0}
+.tx.open{max-height:4000px;margin:0 0 18px;padding-left:14px}
+.tx p{margin:10px 0}
+.tx .txh{font-family:var(--font-head);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--aflac-blue);margin:2px 0 0}
+.toggle.sm{font-size:11.5px;padding:5px 12px;background:var(--blue-700);color:#fff}
+.toggle.sm:hover{background:var(--aflac-blue)}
 footer{max-width:1000px;margin:0 auto;padding:0 22px 40px;font-size:11.5px;color:var(--slate)}
 .disc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;line-height:1.6}
 </style>
@@ -191,9 +233,20 @@ footer{max-width:1000px;margin:0 auto;padding:0 22px 40px;font-size:11.5px;color
       <div class="div"></div>
       <div><div class="t">Tier One Pilot Training</div><div class="s">Field Force Orientation</div></div>
     </div>
-    <div class="prog"><div class="bar"><div class="fill" id="fill"></div></div><div class="lbl" id="plbl">Step 1 of 10</div></div>
+    <button class="matbtn" type="button" onclick="openMaterials()">Materials</button>
+    <div class="prog"><div class="bar"><div class="fill" id="fill"></div></div><div class="lbl" id="plbl">Step 1 of 12</div></div>
   </div>
 </header>
+
+<div class="modal" id="matmodal" onclick="if(event.target===this)closeMaterials()">
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Tier One materials">
+    <div class="eyebrow">Reference</div>
+    <h2 style="margin:6px 0 6px">Tier One materials</h2>
+    <p class="lead" style="font-size:14.5px">Before you answer a product specific question, confirm it here. The outline of coverage is the document that controls.</p>
+    <div id="matlist"></div>
+    <div style="text-align:right;margin-top:18px"><button class="btn ghost" type="button" onclick="closeMaterials()">Close</button></div>
+  </div>
+</div>
 
 <div class="stage"><div id="card" class="card"></div>
   <div class="nav">
@@ -225,19 +278,88 @@ const I = {
 
 /* ---------- DEMO VIDEO ---------- */
 const WORKER_BASE="https://pytbtuzeeguqgrhszmpr.functions.supabase.co/tieronechat"; // Supabase edge fn: /chat + /video
-const VIDEO_URL = WORKER_BASE ? WORKER_BASE.replace(/\/$/,'')+"/video" : "http://aflacclients.com/MicrositePDF/TierOne/Demo/SPandCSPSizzle.mp4";
+const VIDEO_PRIMARY = WORKER_BASE ? WORKER_BASE.replace(/\/$/,'')+"/video" : "";
+const VIDEO_FALLBACK = "https://aflacclients.com/MicrositePDF/TierOne/Demo/SPandCSPSizzle.mp4";
+const VIDEO_URL = VIDEO_PRIMARY || VIDEO_FALLBACK;
 const SP_END=141;   // 2:21 — self-service / enrollment section ends here
 const CSP_START=142; // 2:22 — admin / CSP portal section begins
+/* If the primary source fails, swap to the direct MP4 once, then surface a clear message. */
+function demoFallback(v){
+  if(!v || v.dataset.fellBack==='1') { demoNote('The demo video could not be loaded. Use the direct links below, or check your connection.'); return; }
+  v.dataset.fellBack='1'; v.src=VIDEO_FALLBACK; v.load();
+  demoNote('Primary video source was unavailable — switched to the direct link.');
+}
+function demoNote(msg){
+  const n=document.getElementById('demonote'); if(!n) return;
+  n.textContent=msg; n.style.display='block';
+}
 function demoSeek(t,end){
   const v=document.getElementById('demovid'); if(!v)return;
+  if(!v.readyState){ demoNote('Video is still loading — give it a moment, then press play.'); }
   const stop=(typeof end==='number')?end:null;
   v.ontimeupdate=()=>{ if(stop!=null && v.currentTime>=stop){ v.pause(); v.ontimeupdate=null; } };
-  try{ v.currentTime=t; v.play(); }catch(e){}
+  try{ v.currentTime=t; const p=v.play(); if(p&&p.catch)p.catch(()=>{}); }catch(e){}
 }
 
 /* ---------- CHAT BACKEND ---------- */
 const CHAT_API = WORKER_BASE ? WORKER_BASE.replace(/\/$/,'')+"/chat" : ""; // derived from WORKER_BASE; empty = offline FAQ
 let CHAT_HISTORY=[];
+
+/* ---------- PRODUCT BY PRODUCT COMPARISON ----------
+   DIRECTIONS ONLY. Deliberately no dollar amounts: amounts date, directions do not, and
+   an associate quoting a figure from training instead of the outline of coverage is
+   exactly the risk this lesson exists to prevent.
+   Sourced from the T1/Aflac benefit comparison, product by product. */
+const COMPARE_SRC="This shows you <strong>where</strong> the differences are, not what any benefit pays. Amounts change; the shape of the difference is what you carry in your head. Always pull the actual figure from the outline of coverage, for the specific plan and tier, before you say it out loud.";
+const COMPARE=[
+ {p:'Accident', rows:[
+  ['Hospitalization','Tier One pays more per day','up'],
+  ['Hospitalization, intensive care','Tier One pays more at the top level, and has no cap on days where the worksite plan does','up'],
+  ['Accident treatment','Tier One pays more at the higher level','up'],
+  ['Major diagnostic exam','Tier One pays more at the higher level','up'],
+  ['Follow up treatment','Tier One pays more','up'],
+  ['Therapy','Tier One pays more','up'],
+  ['Accidental death and dismemberment rider (optional)','Substantially larger on Tier One, for both adult and child','up'],
+  ['Health screening / wellness','Not on Tier One','none'],
+  ['Transportation','Not on Tier One','none'],
+  ['Lodging','Not on Tier One','none'],
+  ['Prosthesis, including repair and replacement','Not on Tier One','none'],
+  ['Blood and plasma','Not on Tier One','none'],
+  ['Family support','Not on Tier One','none']
+ ]},
+ {p:'Critical Illness', rows:[
+  ['Initial diagnosis, spouse or child','Tier One pays the full benefit; the worksite plan pays half','up'],
+  ['Initial diagnosis, primary insured','Full benefit on both','same'],
+  ['Face amount growth','Tier One increases it automatically each year until the initial diagnosis benefit is paid','up'],
+  ['Recurrence or a separate event','Tier One pays a partial benefit','same'],
+  ['Coronary artery bypass graft','Tier One pays a partial benefit','same'],
+  ['Cancer as a covered condition','Can be added on Tier One','same'],
+  ['Accidental death','Not on Tier One; the worksite plan has it','none']
+ ]},
+ {p:'Cancer', rows:[
+  ['Hospitalization, days 1 to 30','Tier One pays more','up'],
+  ['Hospitalization, day 31 and beyond','Tier One pays more','up'],
+  ['Initial diagnosis benefit','Tier One pays less','down'],
+  ['Initial diagnosis building rider (optional)','On both; a flat annual increase on Tier One','same']
+ ]},
+ {p:'Dental', note:'Dental is not in the benefit comparison. Both points below come from the 2026 product review and must be confirmed in the current outline of coverage.', rows:[
+  ['Who the benefit is paid to','NOT paid directly to the policyholder on Tier One','none'],
+  ['Waiting periods','Tier One has them: preventive from day one, basic and major wait several months','none']
+ ]}
+];
+function compareHTML(){
+ return COMPARE.map((c,i)=>{
+   const n={up:0,down:0,none:0,same:0}; c.rows.forEach(r=>n[r[2]]++);
+   const bits=[]; if(n.up)bits.push(n.up+' stronger'); if(n.down)bits.push(n.down+' lower'); if(n.none)bits.push(n.none+' not offered');
+   return `<div class="acc" id="acc${i}">
+   <button type="button" onclick="document.getElementById('acc${i}').classList.toggle('open')">
+     <span>${c.p}</span><span class="cnt">${bits.join(' &middot; ')} &middot; tap to open</span></button>
+   <div class="panel"><table>
+     <tr><th>Benefit</th><th>How Tier One compares</th></tr>
+     ${c.rows.map(r=>`<tr class="${r[2]}"><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}
+   </table>${c.note?`<div class="srcnote" style="margin:0;border-radius:0;border:none;border-top:1px solid var(--line)">${c.note}</div>`:''}</div>
+ </div>`;}).join('');
+}
 
 /* ---------- CONTENT (slides) ---------- */
 const steps = [
@@ -250,10 +372,10 @@ const steps = [
  <div class="tree">
    <div class="parent">Aflac Incorporated</div>
    <div class="kids">
-     <div class="node" onclick="this.classList.toggle('open')"><div class="nm">Aflac (Columbus)</div><div class="role">American Family Life Assurance Co. — the worksite / payroll line.</div></div>
-     <div class="node" onclick="this.classList.toggle('open')"><div class="nm">Aflac New York</div><div class="role">Aflac’s New York underwriting entity.</div></div>
-     <div class="node" onclick="this.classList.toggle('open')"><div class="nm">CAIC</div><div class="role">Continental American — group products.</div></div>
-     <div class="node t1" onclick="this.classList.toggle('open')"><div class="nm">Tier One ★</div><div class="role">The direct & digital entity — the one in your hands for this pilot.</div></div>
+     <div class="node" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}"><div class="nm">Aflac (Columbus)</div><div class="role">American Family Life Assurance Co. — the worksite / payroll line.</div></div>
+     <div class="node" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}"><div class="nm">Aflac New York</div><div class="role">Aflac’s New York underwriting entity.</div></div>
+     <div class="node" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}"><div class="nm">CAIC</div><div class="role">Continental American — group products.</div></div>
+     <div class="node t1" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}"><div class="nm">Tier One ★</div><div class="role">The direct & digital entity — the one in your hands for this pilot.</div></div>
    </div>
  </div>
  <div class="callout">If a customer asks “who’s Tier One?” — your answer is easy and true: <strong>It’s Aflac. The part built to let you buy online, directly, on your own time.</strong></div>`},
@@ -264,7 +386,7 @@ const steps = [
    <div class="mini"><h4>${I.globe} What Tier One was built for</h4><ul><li>Direct sales to individuals</li><li>Digital-direct & embedded partnerships</li><li>Online, anytime, on any device</li></ul></div>
  </div>
  <div class="callout">The same platform Aflac’s partners use is now yours. Partners like <strong>USAA</strong> use Aflac’s technology to cross-sell coverage online — Tier One brings that same buy flow to your direct sales.</div>
- <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Drag each item into the right column:</p>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Drag each item into the right column — or tap an item, then tap a column:</p>
  <div class="sort" id="sortbins">
    <div class="bin" data-bin="ws"><h4>Worksite</h4></div>
    <div class="bin" data-bin="t1"><h4>Tier One</h4></div>
@@ -273,7 +395,8 @@ const steps = [
  <div class="expl" id="sortexpl"></div>`},
 /* Live demo */
 {eyebrow:'Live Demo', h:'See it in action: the two Tier One portals', lead:'A quick walkthrough of both sides of the platform. Use the buttons to jump straight to either part.',
- html:`<video id="demovid" controls preload="metadata" playsinline style="width:100%;max-height:420px;border-radius:12px;background:#000;border:1px solid var(--line)" src="${VIDEO_URL}"></video>
+ html:`<video id="demovid" controls preload="metadata" playsinline style="width:100%;max-height:420px;border-radius:12px;background:#000;border:1px solid var(--line)" src="${VIDEO_URL}" onerror="demoFallback(this)"></video>
+ <div class="warn" id="demonote" style="display:none"></div>
  <p class="note" style="font-size:13px;color:var(--slate);margin:12px 0 6px">Jump to a section:</p>
  <div style="display:flex;gap:10px;flex-wrap:wrap">
    <button class="btn" style="font-size:14px;padding:10px 18px" onclick="demoSeek(0,SP_END)">&#9658;&nbsp; Enrollment / Self-Service Portal &middot; 0:00&ndash;2:21</button>
@@ -282,11 +405,17 @@ const steps = [
  <div class="callout" style="margin-top:12px">Two views, one platform: the <strong>self-service portal</strong> is where your customer enrolls and manages their own coverage; the <strong>admin / CSP portal</strong> is the back-office view. The admin section begins at 2:22.</div>
  <p class="note" style="font-size:12px;color:var(--slate);margin-top:8px">Video not loading here? Open it directly: <a href="${VIDEO_URL}#t=0,141" target="_blank" rel="noopener">Self-Service Portal (0:00&ndash;2:21)</a> &nbsp;·&nbsp; <a href="${VIDEO_URL}#t=142" target="_blank" rel="noopener">Admin Portal (CSP)</a>.</p>`},
 /* 3 Lesson 3 */
-{af:'l3', eyebrow:'Plan Designs', h:'Same categories, a few real differences', lead:'You already know most of this. The categories and the cash-benefit promise don’t change — a few details do.',
- html:`<div class="cols">
-   <div class="mini"><h4>${I.check} What stays the same</h4><ul><li>Same lines: Accident, Cancer, Critical Illness, Dental</li><li>Cash paid directly to the policyholder</li><li><strong>Critical Illness = essentially the same plan</strong> (same 8 conditions; higher top face: $25K vs $20K)</li></ul></div>
-   <div class="mini"><h4>${I.alert} Specific to Tier One</h4><ul><li>Fixed <strong>Standard / Plus / Elite</strong> tiers (worksite grows benefits yearly)</li><li>Dental <strong>waiting periods</strong> (basic ~6 mo; major 9–12 mo)</li><li>Cancer screening & annual-care benefits are <strong>tier-based and lower</strong></li></ul></div>
+{af:'l3', eyebrow:'Plan Designs', h:'Same lines. Real differences in the benefits.', lead:'The categories carry over. The benefit detail does not, and it moves in both directions. Some Tier One benefits are better than what you are used to. Others are not there at all.',
+ html:`<div class="callout"><strong>What stays the same:</strong> the same four lines, Accident, Cancer, Critical Illness and Dental. Benefits are paid based on the treatment received. And you are still placing business inside the Aflac family.</div>
+ <div class="cols">
+   <div class="mini win"><h4>${I.check} Where Tier One is stronger</h4><ul><li><strong>Critical Illness pays the spouse or child 100% of the initial diagnosis benefit.</strong> The worksite plan pays them 50%. On a family case this is your strongest story.</li><li>The Critical Illness <strong>face amount grows automatically each year</strong> until the initial diagnosis benefit is paid.</li><li><strong>Accident pays more</strong> on hospitalization, ICU (with no day cap), treatment, diagnostic exam, follow up and therapy.</li><li>The optional <strong>ADD rider is substantially larger</strong> at both adult and child level.</li><li><strong>Cancer hospitalization pays more</strong> at every level, days 1 to 30 and beyond.</li></ul></div>
+   <div class="mini watch"><h4>${I.alert} Where Tier One is more limited</h4><ul><li><strong>Dental benefits are not paid directly to the policyholder</strong></li><li><strong>No Accidental Death benefit</strong> on Critical Illness</li><li>Accident <strong>drops six benefits</strong> the worksite plan has: wellness or screening, transportation, lodging, prosthesis, blood and plasma, family support</li><li><strong>Cancer initial diagnosis</strong> pays less than the worksite plan</li><li>Dental <strong>waiting periods</strong>: preventive from day one, basic and major wait several months</li></ul></div>
  </div>
+ <div class="warn"><strong>Underwriting is tighter than you may be used to.</strong> Tier One is direct business, so the application asks more than a worksite enrollment does. As one example, the cancer free look back runs 10 years rather than 5. Read the actual questions on the Tier One application before you tell someone they will qualify.</div>
+ <p class="note" style="font-size:13px;color:var(--slate);margin-top:18px"><strong>Product by product.</strong> Open each one and look at where the rows turn green, orange and red:</p>
+ ${compareHTML()}
+ <div class="srcnote">${COMPARE_SRC}</div>
+ <div style="text-align:center;margin-top:14px"><button class="btn" type="button" onclick="openMaterials()">Open the Tier One materials</button></div>
  <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Same or Different on Tier One? Tap your answer:</p>
  <div id="sd"></div>`},
 /* 4 Lesson 4 */
@@ -296,6 +425,7 @@ const steps = [
    <div class="step"><div class="n">2</div><h4>Open the materials</h4><p>Pull up the Tier One brochure or outline of coverage.</p></div>
    <div class="step"><div class="n">3</div><h4>Then answer</h4><p>Confirm it matches Tier One, then answer with confidence.</p></div>
  </div>
+ <div style="text-align:center;margin-top:18px"><button class="btn" type="button" onclick="openMaterials()">Open the Tier One materials</button></div>
  <div class="mini" style="margin-top:18px"><h4>${I.doc} Scenario</h4><p style="font-size:14.5px;margin:0 0 10px">A friend asks what your dental covers for a crown. What’s your move?</p><div id="scen"></div></div>`},
 /* 5 Lesson 5 */
 {af:'l5', eyebrow:'The Pilot Playbook', h:'How you put Tier One to work — and get paid', lead:'You stay the trusted advisor; the platform handles the purchase and the credit.',
@@ -360,17 +490,115 @@ const steps = [
 {type:'chat'}
 ];
 
-/* ---------- Lesson 1 VO script (Module 1) ---------- */
-const VO1 = `Welcome to the Tier One pilot. If you're hearing this, you're one of the first in the field force to ever put Tier One in your own hands — so let's get you ready to do it right. In the next fifteen minutes, you'll learn what Tier One is, how it's different from the worksite business you may know, how the pilot pays you, and the rules that keep your link switched on. ::: Here's the first thing to plant firmly: when you place Tier One business, you are still selling Aflac. Tier One Insurance Company is a subsidiary of Aflac Incorporated — one of the underwriting entities inside the Aflac family, alongside Aflac of Columbus, Aflac New York, and Continental American. Same parent. Same brand. Tier One is simply the part of Aflac built for the direct and digital channel. So if a customer asks who Tier One is, your answer is easy and true: it's Aflac — the part built to let you buy online, directly, on your own time.`;
+/* ---------- LEARNER STATE (survives Back / Continue) ---------- */
+const STATE = { sort:{}, sd:{}, onoff:{}, comp:{}, scen:null, go:{}, calc:{apps:10}, quiz:null, chat:[] };
+
+/* ---------- MATERIALS ----------------------------------------------------
+   PASTE THE REAL DOCUMENT URLs BELOW. Any entry left with url:"" renders as a
+   muted "Ask your DSC" card instead of a dead link, so nothing here can 404 on
+   a learner. Only the entries with a url become clickable.
+   -------------------------------------------------------------------------- */
+const MATERIALS=[
+ {t:"Tier One outline of coverage", d:"The controlling benefit document. Confirm every specific benefit amount here before you quote it.", url:""},
+ {t:"Tier One product brochures", d:"Accident, Cancer, Critical Illness and Dental, with benefit amounts by Standard, Plus and Elite tier.", url:""},
+ {t:"Tier One direct site", d:"The customer facing buy flow your personal link points into. Useful for seeing exactly what your contact sees.", url:"https://go.tieronedirect.com/"},
+ {t:"Your personal QR code and link", d:"Issued to you for the pilot. If you do not have yours yet, ask your DSC.", url:""},
+ {t:"One Aflac", d:"Current Triple Crown criteria, including the Fast Start and Super Fast Start thresholds and award amounts.", url:""},
+ {t:"Approved marketing materials", d:"The only assets you may post or send. Anything you make yourself counts as unapproved advertising.", url:""}
+];
+
+/* ---------- STALE NARRATION GATE ----------
+   Lessons whose recorded mp3 no longer matches the approved lesson content.
+   The player is suppressed and the corrected script is shown instead, so nobody
+   hears a superseded statement. Delete the entry once the mp3 has been
+   re-rendered from generate_all_vo.py. */
+const AUDIO_PENDING={
+  /* empty — every lesson's mp3 matches its approved script.
+     l3 re-cut 2026-07-29 against the T1/Aflac benefit comparison. */
+};
+
+/* ---------- TRANSCRIPTS ----------
+   Verbatim text of each Abigail voiceover, taken from generate_all_vo.py so the
+   written and spoken versions cannot drift apart. Paragraph breaks added for reading. */
+const TRANSCRIPTS={
+ "cold-open":[
+  "Welcome to the Tier One pilot. If you're hearing this, you're one of the first people in the field force to put Tier One to work, so let's get you ready to do it well.",
+  "Here's the plan for the next twenty minutes or so. We'll cover what Tier One is, the few real differences from the worksite business you already know, how the pilot works and how it pays you, the rules that keep your link active, and how to stay compliant. At the end there's a chat assistant you can ask anything. Let's get started."
+ ],
+ l1:[
+  "Let's start with the most important point. When you place Tier One business, you are still selling Aflac. Tier One Insurance Company is a subsidiary of Aflac Incorporated. It's one of the underwriting entities inside the Aflac family, right alongside American Family Life of Columbus, Aflac New York, and Continental American.",
+  "Same parent company. Same brand behind the products. Tier One is simply the part of Aflac built for the direct and digital channel.",
+  "So if someone asks who Tier One is, the answer is simple, and it's true. It's Aflac. It's the part of Aflac built to let people buy online, directly, on their own time."
+ ],
+ l2:[
+  "So why does Tier One exist? Because it was built for a different market than the worksite.",
+  "Think about where the field has spent its time. The worksite. Employer groups, payroll deduction, in person at open enrollment. That model works well, and it isn't the only one.",
+  "Tier One was built for direct sales to individuals. Online, any time, on any device, with no employer and no enrollment window required. That's actually where Aflac started, with direct, person to person selling. This pilot brings that back through modern technology, and it's the first time Tier One has been in the field's hands.",
+  "The technology is already proven. The same platform Aflac's partners use is now yours. Partners like USAA use Aflac's technology to offer this coverage online, and Tier One brings that same buy flow to your own direct sales.",
+  "You don't build the site, and you don't process the application. The platform does that. Your work happens before the click."
+ ],
+ l3:[
+  "Now the products. Tier One covers the same lines you know from Aflac: Accident, Cancer, Critical Illness, and Dental. Benefits are paid based on the treatment received. But the benefit detail inside each product is genuinely different, and it moves in both directions. Some Tier One benefits are better than what you sell today. Others are simply not there.",
+  "Start with Critical Illness, because this is your strongest story. On the worksite plan, a covered spouse or child receives fifty percent of the initial diagnosis benefit. On Tier One, they receive one hundred percent, the same as the primary insured. On a family case that is a significant difference, and you should lead with it. Tier One Critical Illness also increases the face amount automatically each year until the initial diagnosis benefit is paid, and cancer can be added as a covered condition.",
+  "The trade off on Critical Illness is that there is no Accidental Death benefit on the Tier One plan at all. The worksite plan has one. Know that before someone asks.",
+  "On Accident, the daily and treatment amounts are generally higher on Tier One. Hospitalization pays more per day. Intensive care pays more at the top end, and it has no day cap where the worksite plan does. Follow up treatment, therapy, and the major diagnostic exam all pay more. The optional accidental death and dismemberment rider is substantially larger than the worksite version, at both the adult and the child level.",
+  "But Tier One Accident also drops six benefits the worksite plan includes. There is no wellness or health screening benefit. No transportation benefit. No lodging benefit. No prosthesis benefit, no blood and plasma benefit, and no family support benefit. If your customer is used to the worksite accident plan, those absences are what they will notice, so raise them yourself rather than letting them find out at claim time.",
+  "On Cancer it splits. The initial diagnosis benefit runs lower on Tier One. But hospitalization pays meaningfully more, at every level, both for the first thirty days and beyond.",
+  "Dental is the one to be most careful with. Tier One dental benefits are not paid directly to the policyholder. That is different from the worksite plan, so do not describe it the same way. Tier One dental also has waiting periods, with preventive care from day one but basic and major services waiting several months.",
+  "And one thing that catches newer associates. Because Tier One is direct business, the underwriting is tighter than a worksite enrollment. The application asks more, and it looks back further. As one example, the cancer free look back runs ten years instead of five. Read the actual questions before you tell someone they will qualify, and never promise an outcome.",
+  "So here is the habit. The product names are familiar. The numbers are not. Open the Tier One materials, confirm the specific benefit for the specific plan and tier, and then answer.",
+ ],
+ l4:[
+  "Here's the one habit to build from day one. If a friend or family member asks you a product specific question, review the Tier One brochures and materials first, before you answer.",
+  "You don't need to memorize every detail. You do need to make sure that what you tell someone matches the actual Tier One product, because the amounts and a few of the rules are different from the worksite.",
+  "So when a real question comes up, open the Tier One brochure or the outline of coverage, confirm it, and then answer with confidence. That one habit keeps you accurate, it keeps your customer's trust, and it keeps you compliant."
+ ],
+ l5:[
+  "So how do you actually put Tier One to work, and how does it pay you? Here's the playbook, in four simple steps.",
+  "One, promote and discuss. Talk about Aflac and why protection matters with the people already in your circle. Two, share your link. You get a personal QR code and a unique link. Put it wherever your people are. Three, they buy online. Your contact completes the Tier One buy flow themselves. There's no agent entry. They do their own application. And four, it tracks back to you. The sale credits your writing number and rolls up your hierarchy, just like the rest of your business.",
+  "So your role is clear. You're the advisor and the connector. You start the conversation, and the platform completes the sale.",
+  "Now, how it pays. Three things. First, you earn full production credit on every sale, and that credit counts toward your Traditional production. During the pilot it's applied manually, so it won't post on its own, but it is tracked and applied for you.",
+  "Second, on top of that credit, you get a one time, two hundred and fifty dollar bonus for every policy that issues, paid within about three business days. A policy issues once payment is collected, on the effective date. So this is real money, and it's fast.",
+  "And third, here's the part that compounds. Because your Tier One production counts toward your Traditional annualized premium, it helps you reach the new associate milestones in the Triple Crown series. Fast Start is five thousand dollars of premium in your first four weeks. Super Fast Start is fifteen thousand in your first eight weeks. Those are the first two rungs of a ladder that, across your first year, can pay out around thirteen thousand dollars in bonuses. Tier One sales help you climb it faster. Award amounts and rules can change, so check the current criteria on One Aflac.",
+  "Here's the simple goal to start. Ten apps in your first thirty days. That's two thousand five hundred dollars in fast cash, real production credit, and real momentum toward Fast Start, while you're still learning the business."
+ ],
+ l6:[
+  "Because the pilot pays a flat bonus instead of a commission, there are a few rules that protect the program and your link. Think of them as what keeps your link active.",
+  "Rule one. Keep your business on the books. If five or more of your policies lapse within the first one hundred twenty days, your personal link is turned off. The way to stay clear of that is simple. Write real coverage to real people who want it and intend to keep it.",
+  "Rule two. This is a pilot, and it runs for ninety days. At the end of that window, Aflac can turn the links off. Your link is a pilot privilege, so make the most of the time.",
+  "Rule three. If claims activity looks unusual, or there's any sign of fraud, Aflac can turn a link off while it reviews. That protects the pilot for everyone in it.",
+  "None of this should worry you. Every one of these is in your control. Sell honestly, sell people who want the coverage, keep it on the books, and your link stays active."
+ ],
+ l7:[
+  "Last lesson, and it's the one that protects your license and your bonuses. Here are the rules that matter most.",
+  "First, never misrepresent the product. Don't exaggerate benefits, don't skip over the limitations, and don't make a misleading comparison. Describe what the policy actually does.",
+  "Second, always be clear that it's supplemental. Tier One health products are limited benefit supplemental insurance. They are not major medical, not minimum essential coverage, and not a replacement for comprehensive or ACA health insurance. Never let anyone believe otherwise.",
+  "Third, use approved materials only. Market with your approved link and approved messaging. No homemade flyers, no edited screenshots, no changing the numbers. A social post, a text, a direct message, your bio link, all of that counts as advertising, and all of it has to match what's approved.",
+  "Fourth, name the company truthfully. It's Tier One Insurance Company, and in California, Tier One Life Insurance Company, a subsidiary of Aflac Incorporated. Don't suggest it's an unaffiliated company, and never imply a government agency endorses it.",
+  "Now two rules that protect your contest and bonus qualification. Giving, splitting, or receiving business just to qualify for a contest is strictly prohibited. Aflac investigates suspected manipulation, and it can mean disqualification, or even a chargeback of an award you already received. And keep your no pay rate at or under thirteen point zero four percent. That rate is just the share of your policies that never get paid, so the way you protect it is the same thing that keeps your link on. Write business to people who keep it.",
+  "A few more, quickly. Only sell where you're licensed and appointed, and the customer's home state is what counts. Never guarantee that a claim will be paid, because benefits pay according to the policy. Don't offer cash or gifts to get someone to sign up. Don't run down someone's existing coverage to make a switch, and never tell anyone to drop their major medical for a supplemental plan. Recommend only what fits the person. Protect their personal information. And keep your own story truthful.",
+  "Follow these, and you build exactly the kind of trusted reputation this pilot runs on."
+ ],
+ "get-started":[
+  "Alright. You know what Tier One is, how it pays, and how to do it right. So let's get you moving. Your goal is ten apps in your first thirty days. Here's how people hit it.",
+  "Start with the people who already trust you. Text your QR code to friends and family. Add your unique link to your social bios and your email signature. Share it with your centers of influence, your clubs, your church, your gym, the local businesses you know.",
+  "And tell your own story, about why you protect your own family, because that story is the most persuasive thing you've got.",
+  "You don't need a big audience. You need real conversations with people who already know you. Ten of them in thirty days, and you're off to a strong start. Welcome to the pilot."
+ ]
+};
 
 /* ---------- INTERACTION DATA ---------- */
 const sortItems=[{t:'Payroll deduction',b:'ws'},{t:'Buy online anytime',b:'t1'},{t:'Open enrollment window',b:'ws'},{t:'Personal QR / link',b:'t1'},{t:'Employer groups',b:'ws'},{t:'Direct to individuals',b:'t1'}];
 const sdItems=[
- {q:'Critical Illness covers the same 8 conditions.',a:'Same',e:'Correct — CI is essentially the same plan; Tier One just offers a higher top face ($25K).'},
- {q:'Tier One dental has no waiting period.',a:'Different',e:'Different — Tier One dental has waiting periods (basic ~6 mo, major 9–12 mo). The worksite PPO had none.'},
- {q:'Benefits are paid as cash directly to the policyholder.',a:'Same',e:'Correct — the cash-benefit promise is identical across both lines.'},
- {q:'Cancer screening & annual-care amounts match the worksite.',a:'Different',e:'Different — on Tier One they’re tier-based and generally lower.'},
- {q:'Tier One uses fixed Standard/Plus/Elite tiers.',a:'Different',e:'Different vs. worksite — worksite grows certain benefits each year; Tier One locks them at the chosen tier.'}
+ {q:'Tier One covers the same product lines: Accident, Cancer, Critical Illness, Dental.',a:'Same',e:'Same — the categories carry over. It is the benefit detail inside each one that moves.'},
+ {q:'Tier One dental benefits are paid directly to the policyholder.',a:'Different',e:'Different — Tier One dental benefits are NOT paid directly to the policyholder. Do not describe dental the way you would the worksite plan.'},
+ {q:'Tier One dental has no waiting period.',a:'Different',e:'Different — Tier One dental has waiting periods. Preventive is day one; basic and major wait several months. Confirm the exact wait in the outline of coverage.'},
+ {q:'Tier One Accident covers the same list of benefits as the worksite plan.',a:'Different',e:'Different — Tier One Accident drops six of them: wellness or health screening, transportation, lodging, prosthesis, blood and plasma, and family support. Raise those yourself rather than letting a customer find out at claim time.'},
+ {q:'Tier One Accident pays less per day for a hospital stay.',a:'Different',e:'Different, in your favour. Tier One pays more per day, and its intensive care benefit has no day cap where the worksite plan does.'},
+ {q:'The Tier One Critical Illness plan includes an Accidental Death benefit.',a:'Different',e:'Different — there is no Accidental Death benefit on the Tier One Critical Illness plan.'},
+ {q:'A covered spouse gets the same initial diagnosis benefit as the primary insured on Critical Illness.',a:'Different',e:'Different, and in your customer’s favour. Tier One pays 100% of the initial diagnosis benefit for EVERY covered person. The worksite plan pays 100% for the primary insured and only 50% for a spouse or dependent.'},
+ {q:'You are still placing business inside the Aflac family of insurers.',a:'Same',e:'Same — Tier One Insurance Company is a subsidiary of Aflac Incorporated. That does not change.'},
+ {q:'The underwriting questions match what you see on a worksite enrollment.',a:'Different',e:'Different — Tier One is direct business and underwrites more tightly. The cancer free look back runs 10 years rather than 5, for example. Read the actual application questions before you promise anyone they will qualify.'}
 ];
 const scenOpts=[
  {t:'Answer from memory with the worksite figures',ok:false,e:'No — the amounts can differ. Don’t answer product specifics from memory.'},
@@ -392,23 +620,30 @@ const compItems=[
 ];
 const quizQs=[
  {q:'Tier One is best described as:',opts:['A competitor to Aflac','A subsidiary of Aflac Incorporated, built for direct/digital','A worksite payroll product','An ACA major-medical plan'],c:1},
- {q:'The cleanest dividing line vs. the worksite line is:',opts:['Underwriting entity + distribution channel','Price only','Brand','The cash-benefit promise'],c:0},
- {q:'Which product is essentially the same design on both lines?',opts:['Dental','Accident','Critical Illness','Cancer'],c:2},
+ {q:'The cleanest dividing line vs. the worksite line is:',opts:['Underwriting entity + distribution channel','Price only','Brand','Benefit amounts only'],c:0},
+ {q:'Which of these is true of Tier One benefits?',opts:['Every benefit matches the worksite plan','Dental benefits are not paid directly to the policyholder','Accident carries the same Wellness benefit as the worksite','The plans differ only on price'],c:1},
  {q:'A friend asks a product-specific question. You should:',opts:['Answer from memory','Review the Tier One brochures/materials first, then answer','Use the worksite figures','Say it’s the same as the worksite plan'],c:1},
  {q:'Per issued policy during the pilot (beyond credit), you get:',opts:['A clawback-able commission','Nothing extra','A one-time $250, ~3 business days after issue','A percentage of premium'],c:2},
  {q:'Which can turn a link off? (best answer)',opts:['Answering a coverage question','5+ policies lapsing within 120 days','Sharing your approved link','Telling your true story'],c:1},
  {q:'Which is compliant when marketing your link?',opts:['“This replaces your health insurance”','Editing benefit figures','Sharing your approved link with the supplemental disclosure','Soliciting where you’re not licensed'],c:2},
- {q:'A friend says “guarantee my claim and I’ll sign up.” You:',opts:['Guarantee it to close','Explain you can’t guarantee claims; point to the outline of coverage','Offer them $50','Call it major medical'],c:1}
+ {q:'A friend says “guarantee my claim and I’ll sign up.” You:',opts:['Guarantee it to close','Explain you can’t guarantee claims; point to the outline of coverage','Offer them $50','Call it major medical'],c:1},
+ {q:'On Tier One Critical Illness, a covered spouse receives:',opts:['50% of the initial diagnosis benefit','100% of the initial diagnosis benefit','No benefit at all','Whatever the worksite plan pays'],c:1},
+ {q:'Compared with a worksite enrollment, Tier One underwriting is:',opts:['Identical','Looser, because it is online','Tighter, because it is direct business','Waived for friends and family'],c:2},
+ {q:'Which of these does Tier One Accident NOT include?',opts:['Hospitalization','Therapy','Wellness / health screening','Follow up treatment'],c:2},
+ {q:'The optional accidental death and dismemberment rider on Tier One Accident is:',opts:['Smaller than the worksite version','Substantially larger than the worksite version','Identical','Not offered'],c:1}
 ];
 
 /* ---------- CHAT KB ---------- */
 const KB=[
- {k:['critical illness','ci','same plan','8 conditions'],a:'Critical Illness is essentially the same plan on both lines — same 8 covered conditions and the 50% subsequent-event benefit. Tier One offers a higher top face amount ($25,000 vs. $20,000). Sell it with confidence.',s:'Comparison summary · Plan validation'},
- {k:['dental','waiting','crown','tooth'],a:'Tier One dental has waiting periods — about 6 months on basic services and 9–12 months on major services; preventive is day-one. The worksite PPO had no waiting period, so flag the waits up front and confirm the exact figure in the outline of coverage.',s:'Plan validation'},
- {k:['cancer','screening','annual care'],a:'Same cancer categories, but several Tier One benefits are tier-based and lower than the worksite (e.g., screening $25/$75/$100 vs. flat $75; annual care $100/$200/$300 vs. $500). Quote from the Tier One tier.',s:'Plan validation'},
- {k:['tier','standard','plus','elite','building'],a:'Tier One uses fixed Standard / Plus / Elite tiers — benefit amounts are set by the tier chosen at issue. The worksite line instead grows certain benefits each year (the Building Benefit).',s:'Plan validation'},
+ {k:['critical illness','ci','same plan','accidental death','face amount','recurrence','bypass'],a:'Tier One Critical Illness cuts both ways. <strong>In your favour:</strong> the spouse or child receives 100% of the initial diagnosis benefit, where the worksite plan pays them 50%. The face amount also grows automatically each year until the initial diagnosis benefit is paid, a recurrence or separate event pays 50%, coronary artery bypass graft pays 25%, and cancer can be added as a covered condition. <strong>Watch out for:</strong> there is no Accidental Death benefit on the Tier One CI plan at all. Confirm every amount in the outline of coverage before you quote it.',s:'Benefit comparison deck · 2026 product review'},
+ {k:['accident','wellness','screening','transportation','lodging','prosthesis','blood','plasma','family support','missing','rider','add','dismember'],a:'Tier One Accident generally <strong>pays more</strong> than the worksite plan on hospitalization, intensive care (with no day cap), accident treatment, major diagnostic exam, follow up treatment and therapy, and the optional accidental death and dismemberment rider is substantially larger at both adult and child level. But it <strong>drops six benefits</strong> the worksite plan includes: wellness or health screening, transportation, lodging, prosthesis, blood and plasma, and family support. Raise those absences yourself rather than letting a customer discover them at claim time.',s:'Benefit comparison deck · 2026 product review'},
+ {k:['cancer','hospitalization','initial diagnosis','building'],a:'Cancer splits. The Tier One <strong>initial diagnosis benefit runs lower</strong> than the worksite plan, but Tier One <strong>hospitalization pays meaningfully more</strong> at every level, both for the first 30 days and beyond. The optional initial diagnosis building rider is a flat annual increase on Tier One. Confirm the current amounts in the outline of coverage.',s:'Benefit comparison deck · 2026 product review'},
+ {k:['underwrit','uw','qualify','decline','cancer free','health question','application','eligib'],a:'Tier One underwrites more tightly than a worksite enrollment, because it is direct business. The health questions on the application go further than newer associates expect — as one example, the cancer free look back runs 10 years rather than 5. Read the actual questions on the Tier One application before you tell anyone they will qualify, and never promise an outcome.',s:'Product review · Samantha Roberson'},
+ {k:['spouse','dependent','family','covered person','100%','50%'],a:'On Tier One Critical Illness, 100% of the initial diagnosis benefit is paid for each covered person, including a spouse or dependent. The worksite plan pays the spouse or dependent only 50%. Lead with this on family cases, then confirm the amounts for the chosen tier in the outline of coverage.',s:'Product review · Samantha Roberson'},
+ {k:['dental','waiting','crown','tooth','paid directly','who gets paid'],a:'Two things to get right on Tier One dental. First, <strong>the benefits are not paid directly to the policyholder</strong> — that differs from the worksite plan, so do not describe it the same way. Second, there are waiting periods: preventive is day one, with basic and major services waiting several months. Confirm the exact waits and amounts in the outline of coverage.',s:'Product review · Samantha Roberson'},
+ {k:['tier','standard','plus','elite','grow','build'],a:'Tier One benefit amounts are set by the tier chosen at issue, Standard, Plus or Elite. But do not say Tier One never grows: the Critical Illness face amount increases automatically each year until the initial diagnosis benefit is paid, and Cancer offers an optional initial diagnosis building rider. Check the specific product rather than applying one rule across all four.',s:'Benefit comparison deck · 2026 product review'},
  {k:['link','qr','turn off','shut off','lapse','120'],a:'Your link can be turned off if 5+ policies lapse within the first 120 days, when the 90-day pilot window ends, or if claims look abnormal / fraud is detected (pending review). Keep business honest and on the books and your link stays on.',s:'Pilot rules'},
- {k:['paid','250','bonus','money','credit','commission'],a:'You get full production credit (applied manually during the pilot) plus a one-time $250 per issued policy, paid within ~3 business days. A policy issues when payment is collected on the effective date.',s:'Intro deck v10 · FastTrack'},
+ {k:['paid','250','bonus','money','credit','commission'],a:'You get full production credit (applied manually during the pilot) plus a one-time $250 per issued policy, paid within ~3 business days. A policy issues when payment is collected on the effective date.',s:'Intro deck v10'},
  {k:['how','work','playbook','sell','buy flow'],a:'Four steps: promote & discuss, share your QR/link, your contact buys online themselves (no agent-entry), and it credits your writing number + 01 hierarchy. You’re the advisor; the platform handles the purchase.',s:'Intro deck v10'},
  {k:['compliant','market','advertis','social','rules say'],a:'Use approved materials and your approved link only — social posts, texts and bios all count as advertising. Always disclose it’s supplemental, never guarantee claims, no rebating, and only sell where you’re licensed. (Compliance content pending Aflac legal approval.)',s:'Compliance rules'},
  {k:['supplemental','major medical','aca','replace'],a:'All Tier One health products are limited-benefit supplemental insurance — not major medical, not minimum essential coverage, and not a substitute for ACA coverage. Never imply otherwise.',s:'Comparison summary'},
@@ -432,15 +667,20 @@ function render(){
   document.getElementById('back').disabled=cur===0;
   document.getElementById('next').style.visibility=cur===steps.length-1?'hidden':'visible';
   const dots=document.getElementById('dots');dots.innerHTML='';
-  steps.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===cur?' active':(i<cur?' done':''));dots.appendChild(d);});
+  steps.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===cur?' active':(i<cur?' done':''));
+    d.setAttribute('role','button');d.setAttribute('tabindex','0');d.title='Step '+(i+1)+' of '+steps.length;
+    d.addEventListener('click',()=>{cur=i;render();});
+    d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cur=i;render();}});
+    dots.appendChild(d);});
   // wire interactions by container presence (position-independent)
   if(document.getElementById('sortbins')) initSort();
   if(document.getElementById('sd')) initToggle('sd',sdItems,['Same','Different']);
   if(document.getElementById('scen')) initScen();
-  if(document.getElementById('calcr')) calcUpd(10);
+  if(document.getElementById('calcr')) calcUpd(STATE.calc.apps);
   if(document.getElementById('onoff')) initToggle('onoff',onoffItems,['Stays on','Turned off']);
   if(document.getElementById('comp')) initToggle('comp',compItems,['Compliant','Violation']);
   if(document.getElementById('gocheck')) initGo();
+  if(s.type==='quiz') initQuiz();
   if(s.type==='chat') initChat();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -448,31 +688,62 @@ function introHTML(){
  return `<div class="eyebrow">Field Force Pilot · Module 1</div>
  <h1>Meet Tier One</h1>
  <p class="lead">Part of the Aflac family of insurers — built for direct and digital sales. A field-force orientation for the Tier One pilot.</p>
- <div class="pills"><span class="pill">~15–20 min</span><span class="pill">7 lessons + live demo</span><span class="pill">Quiz + live Q&amp;A</span></div>
+ <div class="pills"><span class="pill">15 to 20 min</span><span class="pill">7 lessons + live demo</span><span class="pill">Audio with full transcripts</span><span class="pill">Quiz + live Q&amp;A</span></div>
  <div class="vo">
    <div class="row">
-     <span class="voice">🎙 Voiceover · Abigail</span>
-     <span class="pend" id="vopend">Audio render pending</span>
-     <audio id="vo1" controls preload="auto" src="audio/cold-open.mp3" style="display:none" onloadeddata="this.style.display='inline-block';document.getElementById('vopend').style.display='none'"></audio>
-     <button class="toggle" onclick="document.getElementById('vos').classList.toggle('open')">Show narration</button>
+     <span class="voice">Voiceover &middot; Abigail</span>
+     <span class="pend" id="vopend" style="display:none">Audio unavailable. The transcript is below.</span>
+     <audio id="vo1" controls preload="metadata" src="audio/cold-open.mp3" onerror="this.style.display='none';document.getElementById('vopend').style.display='inline-block';introTx(true)"></audio>
+     <button class="toggle" id="votog" type="button" onclick="introTx()">Show transcript</button>
    </div>
-   <div class="script" id="vos">Welcome to the Tier One pilot. If you're hearing this, you're one of the first people in the field force to put Tier One to work, so let's get you ready to do it well.<br><br>Here's the plan for the next twenty minutes or so. We'll cover what Tier One is, the few real differences from the worksite business you already know, how the pilot works and how it pays you, the rules that keep your link active, and how to stay compliant. At the end there's a chat assistant you can ask anything. Let's get started.</div>
+   <div class="script" id="vos">${TRANSCRIPTS['cold-open'].map(p=>`<p style="margin:0 0 10px">${p}</p>`).join('')}</div>
  </div>`;
 }
-/* sort */
+/* sort — drag on desktop, tap-to-place on touch; answers persist across navigation */
+let sortPick=null;
+function sortPlace(el,bin){
+ if(!el||!bin) return;
+ const ok=el.dataset.bin===bin.dataset.bin;
+ el.classList.add('placed'); el.classList.remove('picked'); el.draggable=false;
+ el.style.borderColor=ok?'var(--green)':'var(--aflac-red)';
+ el.style.background=ok?'var(--green-50)':'#FBE3DF';
+ bin.appendChild(el);
+ STATE.sort[el.dataset.i]=bin.dataset.bin;
+ sortPick=null;
+ document.querySelectorAll('#sortbins .bin').forEach(b=>b.classList.remove('armed'));
+ checkSort();
+}
 function initSort(){
- const wrap=document.getElementById('sortchips');
- sortItems.forEach((it,i)=>{const c=document.createElement('div');c.className='chip-d';c.draggable=true;c.textContent=it.t;c.dataset.bin=it.b;c.id='sc'+i;
-   c.addEventListener('dragstart',e=>e.dataTransfer.setData('id',c.id));wrap.appendChild(c);});
+ const wrap=document.getElementById('sortchips'); wrap.innerHTML=''; sortPick=null;
+ const bins={}; document.querySelectorAll('#sortbins .bin').forEach(b=>{bins[b.dataset.bin]=b;});
+ sortItems.forEach((it,i)=>{
+   const c=document.createElement('div'); c.className='chip-d'; c.draggable=true;
+   c.textContent=it.t; c.dataset.bin=it.b; c.dataset.i=i; c.id='sc'+i;
+   c.setAttribute('role','button'); c.setAttribute('tabindex','0');
+   c.addEventListener('dragstart',e=>e.dataTransfer.setData('id',c.id));
+   const pick=()=>{
+     if(c.classList.contains('placed')) return;
+     const was = sortPick===c;
+     document.querySelectorAll('.chip-d.picked').forEach(x=>x.classList.remove('picked'));
+     document.querySelectorAll('#sortbins .bin').forEach(b=>b.classList.remove('armed'));
+     if(was){ sortPick=null; return; }
+     c.classList.add('picked'); sortPick=c;
+     document.querySelectorAll('#sortbins .bin').forEach(b=>b.classList.add('armed'));
+   };
+   c.addEventListener('click',pick);
+   c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});
+   wrap.appendChild(c);
+ });
  document.querySelectorAll('#sortbins .bin').forEach(b=>{
+   b.setAttribute('role','button'); b.setAttribute('tabindex','0');
    b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('over');});
    b.addEventListener('dragleave',()=>b.classList.remove('over'));
    b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('over');
-     const el=document.getElementById(e.dataTransfer.getData('id'));
-     const ok=el.dataset.bin===b.dataset.bin;el.classList.add('placed');
-     el.style.borderColor=ok?'var(--green)':'var(--aflac-red)';el.style.background=ok?'var(--green-50)':'#FBE3DF';
-     b.appendChild(el);checkSort();});
+     sortPlace(document.getElementById(e.dataTransfer.getData('id')),b);});
+   b.addEventListener('click',()=>{ if(sortPick) sortPlace(sortPick,b); });
+   b.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&sortPick){e.preventDefault();sortPlace(sortPick,b);}});
  });
+ Object.keys(STATE.sort).forEach(i=>sortPlace(document.getElementById('sc'+i),bins[STATE.sort[i]]));
 }
 function checkSort(){
  const placed=document.querySelectorAll('.chip-d.placed').length;
@@ -480,36 +751,48 @@ function checkSort(){
    const right=[...document.querySelectorAll('.chip-d')].filter(c=>c.parentElement.dataset.bin===c.dataset.bin).length;
    ex.innerHTML=`<strong>${right}/${sortItems.length} correct.</strong> Worksite = employer/payroll/in-person; Tier One = individual/online/your personal link.`;}
 }
-/* generic toggle (same-different, on-off, compliant) */
+/* generic toggle (same-different, on-off, compliant) — regrades cleanly, answers persist */
 function initToggle(id,items,labels){
  const host=document.getElementById(id);host.innerHTML='';
+ const saved=STATE[id]||(STATE[id]={});
  items.forEach((it,i)=>{
    const row=document.createElement('div');row.className='qrow';
    row.innerHTML=`<div class="qt">${it.q}</div><div class="opts">${labels.map(l=>`<button class="opt">${l}</button>`).join('')}</div>`;
    const ex=document.createElement('div');ex.className='expl';ex.textContent=it.e;
-   row.querySelectorAll('.opt').forEach(btn=>btn.addEventListener('click',()=>{
-     row.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel'));
-     const correct=btn.textContent===it.a;
+   const grade=picked=>{
+     row.querySelectorAll('.opt').forEach(b=>b.classList.remove('sel','correct','incorrect'));
+     const btn=[...row.querySelectorAll('.opt')].find(b=>b.textContent===picked);
+     if(!btn) return;
+     const correct=picked===it.a;
      btn.classList.add(correct?'correct':'incorrect');
      if(!correct){row.querySelectorAll('.opt').forEach(b=>{if(b.textContent===it.a)b.classList.add('correct');});}
      ex.className='expl show';
-   }));
+   };
+   row.querySelectorAll('.opt').forEach(btn=>btn.addEventListener('click',()=>{saved[i]=btn.textContent;grade(btn.textContent);}));
    host.appendChild(row);host.appendChild(ex);
+   if(saved[i]!==undefined) grade(saved[i]);
  });
 }
-/* scenario */
+/* scenario — locks after one answer, answer persists */
 function initScen(){
  const host=document.getElementById('scen');host.innerHTML='';
- scenOpts.forEach(o=>{const b=document.createElement('button');b.className='a';b.textContent=o.t;
-   b.addEventListener('click',()=>{host.querySelectorAll('.a').forEach(x=>x.style.pointerEvents='none');
-     b.classList.add(o.ok?'correct':'incorrect');
-     if(!o.ok)host.querySelectorAll('.a').forEach(x=>{if(scenOpts.find(z=>z.t===x.textContent).ok)x.classList.add('correct');});
-     const e=document.createElement('div');e.className='expl show';e.textContent=o.e;host.appendChild(e);});
+ const paint=picked=>{
+   const o=scenOpts.find(z=>z.t===picked); if(!o) return;
+   host.querySelectorAll('.a').forEach(x=>{x.disabled=true;x.style.pointerEvents='none';});
+   const btn=[...host.querySelectorAll('.a')].find(x=>x.textContent===picked);
+   if(btn) btn.classList.add(o.ok?'correct':'incorrect');
+   if(!o.ok) host.querySelectorAll('.a').forEach(x=>{const z=scenOpts.find(y=>y.t===x.textContent); if(z&&z.ok)x.classList.add('correct');});
+   if(!host.querySelector('.expl')){const e=document.createElement('div');e.className='expl show';e.textContent=o.e;host.appendChild(e);}
+ };
+ scenOpts.forEach(o=>{const b=document.createElement('button');b.className='a';b.type='button';b.textContent=o.t;
+   b.addEventListener('click',()=>{ if(STATE.scen!==null) return; STATE.scen=o.t; paint(o.t); });
    host.appendChild(b);});
+ if(STATE.scen!==null) paint(STATE.scen);
 }
 /* calculator */
 function calcUpd(v){
- v=+v;
+ v=+v; if(!isFinite(v)) v=0;
+ STATE.calc.apps=v;
  const cv=document.getElementById('calcv'); if(!cv) return;
  const ap=+(document.getElementById('calcap')?.value||400);
  const fs=+(document.getElementById('calcfs')?.value||5000);
@@ -529,18 +812,97 @@ function calcUpd(v){
  setBar('fsfill','fsstat',fs);
  setBar('sfsfill','sfsstat',sfs);
 }
-/* per-lesson voiceover bar */
-function voBar(key){return `<div class="lvo"><span class="lvo-lbl">🎧 Voiceover · Abigail</span><audio class="lvo-au" controls preload="none" src="audio/${key}.mp3"></audio></div>`;}
+/* per-lesson voiceover bar, with a full written transcript of the same audio */
+function voBar(key){
+ const tx=TRANSCRIPTS[key];
+ const pending=AUDIO_PENDING[key];
+ if(pending){
+   return `<div class="lvo" style="background:var(--orange-50);border-color:#F4D7AE">`
+    +`<span class="lvo-lbl" style="color:#7A4E10">Narration being re-recorded</span>`
+    +`<span style="font-size:12.5px;color:var(--slate);flex:1;min-width:200px">${pending}</span>`
+    +(tx?`<button class="toggle sm" type="button" data-w="script" onclick="toggleTx('tx-${key}',this)">Hide script</button>`:'')
+    +`</div>`
+    +(tx?`<div class="tx open" id="tx-${key}"><p class="txh">Lesson script &middot; current version</p>${tx.map(p=>`<p>${p}</p>`).join('')}</div>`:'');
+ }
+ return `<div class="lvo"><span class="lvo-lbl">Voiceover &middot; Abigail</span>`
+  +`<audio class="lvo-au" controls preload="metadata" src="audio/${key}.mp3" onerror="voFail(this)"></audio>`
+  +(tx?`<button class="toggle sm" type="button" data-w="transcript" onclick="toggleTx('tx-${key}',this)">Show transcript</button>`:'')
+  +`</div>`
+  +(tx?`<div class="tx" id="tx-${key}"><p class="txh">Transcript</p>${tx.map(p=>`<p>${p}</p>`).join('')}</div>`:'');
+}
+function voFail(a){
+ a.style.display='none';
+ const bar=a.closest('.lvo'); if(!bar) return;
+ const btn=bar.querySelector('.toggle');
+ const note=document.createElement('span');
+ note.style.cssText='font-size:12.5px;color:var(--slate)';
+ note.textContent='Audio unavailable. The full transcript is below.';
+ bar.insertBefore(note,btn||null);
+ if(btn) btn.click();
+}
+function toggleTx(id,btn){
+ const el=document.getElementById(id); if(!el) return;
+ const open=el.classList.toggle('open');
+ const word=btn.dataset.w||'transcript';
+ btn.textContent=(open?'Hide ':'Show ')+word;
+}
+function introTx(force){
+ const el=document.getElementById('vos'), btn=document.getElementById('votog'); if(!el) return;
+ const open = force===true ? (el.classList.add('open'),true) : el.classList.toggle('open');
+ if(btn) btn.textContent=open?'Hide transcript':'Show transcript';
+}
+/* materials panel */
+function renderMaterials(){
+ const h=document.getElementById('matlist'); if(!h||h.dataset.done==='1') return; h.dataset.done='1';
+ MATERIALS.forEach(m=>{
+   const has=!!m.url;
+   const el=document.createElement(has?'a':'div');
+   el.className='matitem'+(has?'':' pending');
+   if(has){el.href=m.url;el.target='_blank';el.rel='noopener';}
+   el.innerHTML=`<div class="mt">${m.t}${has?'':'<span class="pendchip">Ask your DSC</span>'}</div><div class="md">${m.d}</div>`;
+   h.appendChild(el);
+ });
+}
+function openMaterials(){renderMaterials();document.getElementById('matmodal').classList.add('open');}
+function closeMaterials(){document.getElementById('matmodal').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMaterials();});
 /* get-started checklist */
 const goItems=['Text my QR code to 10 friends/family','Add my link to my social bios','Add my link to my email signature','Pick 3 centers of influence to share with this week','Post my “why I protect my family” story'];
-function initGo(){const h=document.getElementById('gocheck'); if(!h) return; h.innerHTML=''; goItems.forEach(t=>{const d=document.createElement('div'); d.className='gocheck-item'; d.innerHTML='<span class="box">○</span><span>'+t+'</span>'; d.onclick=()=>{d.classList.toggle('done'); d.querySelector('.box').textContent=d.classList.contains('done')?'✓':'○';}; h.appendChild(d);});}
+function initGo(){const h=document.getElementById('gocheck'); if(!h) return; h.innerHTML='';
+ goItems.forEach((t,i)=>{const d=document.createElement('div'); d.className='gocheck-item'; d.setAttribute('role','button'); d.setAttribute('tabindex','0');
+  d.innerHTML='<span class="box">○</span><span>'+t+'</span>';
+  const paint=()=>{d.classList.toggle('done',!!STATE.go[i]); d.querySelector('.box').textContent=STATE.go[i]?'✓':'○';};
+  const flip=()=>{STATE.go[i]=!STATE.go[i]; paint();};
+  d.addEventListener('click',flip);
+  d.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();}});
+  paint(); h.appendChild(d);});}
 /* quiz */
 let quizState=[];
+const QUIZ_PASS=10; // of 12. Never hardcode the counts in copy; derive them below.
 function quizHTML(){
- quizState=new Array(quizQs.length).fill(null);
- return `<div class="eyebrow">Knowledge Check</div><h1>Final quiz</h1><p class="lead">Eight quick questions — 80% to pass. You’ll see the answer as you go.</p>
- <div class="quiz" id="quiz">${quizQs.map((q,i)=>`<div class="q"><h4>${i+1}. ${q.q}</h4>${q.opts.map((o,j)=>`<button class="a" data-q="${i}" data-o="${j}">${o}</button>`).join('')}</div>`).join('')}</div>
- <div id="qresult"></div>`;
+ quizState = STATE.quiz ? STATE.quiz.slice() : new Array(quizQs.length).fill(null);
+ return `<div class="eyebrow">Knowledge Check</div><h1>Final quiz</h1><p class="lead">${quizQs.length} quick questions — you need ${QUIZ_PASS} of ${quizQs.length} correct to pass. You’ll see the answer as you go.</p>
+ <div class="quiz" id="quiz">${quizQs.map((q,i)=>`<div class="q"><h4>${i+1}. ${q.q}</h4>${q.opts.map((o,j)=>`<button class="a" type="button" data-q="${i}" data-o="${j}">${o}</button>`).join('')}</div>`).join('')}</div>
+ <div id="qresult"></div>
+ <div style="text-align:center;margin-top:16px"><button class="btn ghost" type="button" onclick="quizReset()">Retake the quiz</button></div>`;
+}
+function quizReset(){ STATE.quiz=null; render(); }
+function paintQuiz(qi,oi){
+ const qd=document.querySelectorAll('#quiz .q')[qi]; if(!qd) return;
+ const c=quizQs[qi].c;
+ qd.querySelectorAll('.a').forEach(b=>{b.disabled=true;b.style.pointerEvents='none';const j=+b.dataset.o;if(j===c)b.classList.add('correct');else if(j===oi)b.classList.add('incorrect');});
+}
+function quizScore(scroll){
+ const r=document.getElementById('qresult'); if(!r) return;
+ const right=quizState.filter((o,i)=>o===quizQs[i].c).length;
+ const pct=Math.round(right/quizQs.length*100);
+ const pass=right>=QUIZ_PASS;
+ r.innerHTML=`<div class="score">${right}/${quizQs.length} · ${pct}%</div><div class="${pass?'good':'warn'}" style="text-align:center">${pass?'Nice work — you’re ready. Head to the Q&A to ask anything else.':`Not quite — you need ${QUIZ_PASS} of ${quizQs.length}. Review the lessons you missed, then retake the quiz.`}</div>`;
+ if(scroll) r.scrollIntoView({behavior:'smooth'});
+}
+function initQuiz(){
+ quizState.forEach((oi,qi)=>{ if(oi!==null) paintQuiz(qi,oi); });
+ if(quizState.length && quizState.every(x=>x!==null)) quizScore(false);
 }
 /* chat */
 function chatHTML(){
@@ -551,39 +913,52 @@ function chatHTML(){
    <div class="inbar"><input id="cin" placeholder="Type your question…" onkeydown="if(event.key==='Enter')chatSend()"><button onclick="chatSend()">Send</button></div>
  </div>`;
 }
+const CHAT_GREETING='Hi! I’m your Tier One assistant. I cover Tier One vs. the Aflac products and how this pilot works — and I’ll always point you to the official policy documentation to confirm specifics. Ask me anything in that scope, or tap a question below.';
 function initChat(){
- const log=document.getElementById('clog');
- botSay('Hi! I’m your Tier One assistant. I cover Tier One vs. the Aflac products and how this pilot works — and I’ll always point you to the official policy documentation to confirm specifics. Ask me anything in that scope, or tap a question below.');
+ const log=document.getElementById('clog'); log.innerHTML='';
+ if(!STATE.chat.length) botSay(CHAT_GREETING);
+ else STATE.chat.forEach(m=>paintMsg(m.who,m.t,m.src));
  const chips=['Is Critical Illness the same as what I sell now?','What can turn my link off?','How and when do I get paid?','Does Tier One dental have a waiting period?'];
- const cc=document.getElementById('cchips');chips.forEach(c=>{const b=document.createElement('button');b.className='qchip';b.textContent=c;b.onclick=()=>{document.getElementById('cin').value=c;chatSend();};cc.appendChild(b);});
+ const cc=document.getElementById('cchips');cc.innerHTML='';chips.forEach(c=>{const b=document.createElement('button');b.className='qchip';b.type='button';b.textContent=c;b.onclick=()=>{document.getElementById('cin').value=c;chatSend();};cc.appendChild(b);});
 }
-function botSay(t,src){const log=document.getElementById('clog');const m=document.createElement('div');m.className='msg bot';m.innerHTML=t+(src?`<span class="src">Source: ${src}</span>`:'');log.appendChild(m);log.scrollTop=log.scrollHeight;}
-function meSay(t){const log=document.getElementById('clog');const m=document.createElement('div');m.className='msg me';m.textContent=t;log.appendChild(m);log.scrollTop=log.scrollHeight;}
+function paintMsg(who,t,src){
+ const log=document.getElementById('clog'); if(!log) return;
+ const m=document.createElement('div');m.className='msg '+who;
+ if(who==='bot') m.innerHTML=t+(src?`<span class="src">Source: ${src}</span>`:''); else m.textContent=t;
+ log.appendChild(m);log.scrollTop=log.scrollHeight;
+}
+function botSay(t,src){ STATE.chat.push({who:'bot',t,src}); paintMsg('bot',t,src); }
+function meSay(t){ STATE.chat.push({who:'me',t}); paintMsg('me',t); }
+/* Built-in fallback answers — used whenever the live assistant is unreachable or errors. */
+function kbAnswer(q){
+ const ql=q.toLowerCase();let best=null,score=0;
+ KB.forEach(e=>{const sc=e.k.reduce((a,k)=>a+(ql.includes(k)?1:0),0);if(sc>score){score=sc;best=e;}});
+ if(best&&score>0) return {a:best.a+' <em>Always confirm specifics in the Tier One policy documentation.</em>',s:best.s};
+ return {a:'I only cover Tier One vs. Aflac products, how the pilot works, and the rules. For any specific benefit, always confirm in the Tier One policy documentation.',s:null};
+}
+function kbSay(q,why){ const k=kbAnswer(q); botSay('<em>'+why+' Answering from the built-in reference:</em><br>'+k.a,k.s); }
 async function chatSend(){const inp=document.getElementById('cin');const q=inp.value.trim();if(!q)return;meSay(q);inp.value='';
  CHAT_HISTORY.push({role:'user',content:q});
  if(CHAT_API){
    const log=document.getElementById('clog');const typing=document.createElement('div');typing.className='msg bot';typing.textContent='…';log.appendChild(typing);log.scrollTop=log.scrollHeight;
    try{
      const r=await fetch(CHAT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:CHAT_HISTORY})});
+     if(!r.ok) throw new Error('HTTP '+r.status);
      const d=await r.json();typing.remove();
      if(d.reply){CHAT_HISTORY.push({role:'assistant',content:d.reply});botSay(d.reply.replace(/\n/g,'<br>'));}
-     else botSay(d.error?('Sorry — '+d.error):'Something went wrong. Always confirm details in the Tier One policy documentation.');
-   }catch(e){typing.remove();botSay('I couldn’t reach the assistant just now. Please try again, and always confirm specifics in the Tier One policy documentation.');}
+     else kbSay(q,'The live assistant returned an error.');
+   }catch(e){ if(typing.parentNode) typing.remove(); kbSay(q,'The live assistant is unreachable right now.'); }
    return;
  }
- const ql=q.toLowerCase();let best=null,score=0;
- KB.forEach(e=>{const sc=e.k.reduce((a,k)=>a+(ql.includes(k)?1:0),0);if(sc>score){score=sc;best=e;}});
- setTimeout(()=>{ if(best&&score>0){botSay(best.a+' <em>Always confirm specifics in the Tier One policy documentation.</em>',best.s);} else {botSay('I only cover Tier One vs. Aflac products, how the pilot works, and the rules. For any specific benefit, always confirm in the Tier One policy documentation.');} },300);
+ setTimeout(()=>{const k=kbAnswer(q);botSay(k.a,k.s);},300);
 }
 /* quiz click delegation */
 document.addEventListener('click',e=>{
  if(e.target.classList.contains('a')&&e.target.dataset.q!==undefined&&steps[cur].type==='quiz'){
-   const qi=+e.target.dataset.q,oi=+e.target.dataset.o;if(quizState[qi]!==null)return;quizState[qi]=oi;
-   const qDiv=e.target.closest('.q');const c=quizQs[qi].c;
-   qDiv.querySelectorAll('.a').forEach(b=>{b.style.pointerEvents='none';const j=+b.dataset.o;if(j===c)b.classList.add('correct');else if(j===oi)b.classList.add('incorrect');});
-   if(quizState.every(x=>x!==null)){const right=quizState.filter((o,i)=>o===quizQs[i].c).length;const pct=Math.round(right/quizQs.length*100);
-     const r=document.getElementById('qresult');r.innerHTML=`<div class="score">${right}/${quizQs.length} · ${pct}%</div><div class="${pct>=80?'good':'warn'}" style="text-align:center">${pct>=80?'Nice work — you’re ready. Head to the Q&A to ask anything else.':'Close — review the lessons you missed, then try the Q&A below.'}</div>`;
-     r.scrollIntoView({behavior:'smooth'});}
+   const qi=+e.target.dataset.q,oi=+e.target.dataset.o;if(quizState[qi]!==null)return;
+   quizState[qi]=oi; STATE.quiz=quizState.slice();
+   paintQuiz(qi,oi);
+   if(quizState.every(x=>x!==null)) quizScore(true);
  }
 });
 document.getElementById('next').addEventListener('click',()=>{if(cur<steps.length-1){cur++;render();}});
