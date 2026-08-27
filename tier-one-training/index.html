@@ -846,7 +846,7 @@ function initGo(){const h=document.getElementById('gocheck'); if(!h) return; h.i
   paint(); h.appendChild(d);});}
 /* quiz */
 let quizState=[];
-const QUIZ_PASS=10; // of 12. Never hardcode the counts in copy; derive them below.
+const QUIZ_PASS=9; // 9 of 12 = 75%, the lowest score at or above the 70% pass rule. Never hardcode the counts in copy; derive them below.
 function quizHTML(){
  quizState = STATE.quiz ? STATE.quiz.slice() : new Array(quizQs.length).fill(null);
  return `<div class="eyebrow">Knowledge Check</div><h1>Final quiz</h1><p class="lead">${quizQs.length} quick questions. You need ${QUIZ_PASS} of ${quizQs.length} correct to pass. You’ll see the answer as you go.</p>
