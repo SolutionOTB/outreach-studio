@@ -241,7 +241,9 @@ footer{max-width:1000px;margin:0 auto;padding:0 22px 40px;font-size:11.5px;color
   </div>
 </div>
 <footer><div class="disc" id="disc">
-  <strong>Training use only.</strong> Tier One health products are limited benefit supplemental insurance, not major medical or ACA coverage. Confirm all benefit details in the current Tier One outline of coverage before quoting. Compliance content is illustrative and subject to Aflac compliance/legal approval and applicable state law. Pilot rules (lapse threshold, pilot length) are pending final confirmation. Tier One Insurance Company is a subsidiary of Aflac Incorporated; in California, Tier One Life Insurance Company.
+  <strong>Training use only.</strong> Accident, Cancer, and Critical Illness products are limited-benefit supplemental insurance products and are not major medical insurance or ACA coverage. Dental coverage is a separate insurance product and is subject to its own terms, conditions, limitations, and exclusions. Confirm all benefit details in the current Tier One outline of coverage before quoting. Compliance content is illustrative and subject to Aflac Compliance/Legal approval and applicable state law. Pilot rules (including lapse thresholds and pilot duration) are pending final confirmation. Tier One Insurance Company is a subsidiary of Aflac Incorporated; in California, Tier One Life Insurance Company (NAIC 92908).
+  <p style="margin:10px 0 0;font-size:12px;line-height:1.55"><strong>Confidential and Proprietary. For Internal Use Only. Do Not Distribute.</strong> By accessing these materials, you agree that you will not use the information contained herein other than for training purposes. You further agree not to modify, loan, sell, distribute, or create derivative works based on these materials. Unauthorized usage includes but is not limited to distribution to prospective policyholders or accounts or use in the solicitation of Aflac insurance. Making any misrepresentation for the purpose of solicitation or inducing a policyholder to lapse, forfeit, or surrender an insurance policy is prohibited by law. Any use not specifically permitted herein shall be considered to be a material breach of your Agent’s contract with Aflac and is strictly prohibited. Information herein is considered an overview, does not provide full disclosure and is not an exact description of any policy or rider. Furthermore, the material may not reflect the most current version of the policy or rider. Tier One insurance coverage is underwritten by Tier One Insurance Company. Tier One Insurance Company is part of the Aflac family of insurers.</p>
+  <p style="margin:8px 0 0;font-size:12px"><span id="formno">N2600700</span> &nbsp; Exp. 9/27</p>
 </div></footer>
 
 <script>
@@ -325,9 +327,9 @@ const COMPARE=[
   ['Initial diagnosis building rider (optional)','On both; a flat annual increase on Tier One','same']
  ]},
  {p:'Dental', note:'Compare Tier One dental to the network dental plan new associates are trained on today, not the old worksite indemnity dental. Points from the 2026 product review; confirm every detail in the current Tier One outline of coverage.', rows:[
-  ['Who benefits are paid to','Tier One pays the dental provider, the same way as the network dental plan. Not paid to the policyholder','same'],
+  ['Who benefits are paid to','Tier One pays the dental provider, the same way as the network dental plan. Not paid to the policyholder unless it’s a reimbursement','same'],
   ['Waiting periods','Both plans have them. On Tier One, preventive is covered from day one; basic and major services wait several months','same'],
-  ['Plan specifics: deductible, annual maximum, coinsurance','Tier One has its own schedule. Never carry network dental numbers onto Tier One; confirm in the outline of coverage','same']
+  ['Plan specifics: deductible, annual maximum, coinsurance','Tier One has its own policy schedule. Never carry dental payment details onto Tier One; confirm in the outline of coverage','same']
  ]}
 ];
 function compareHTML(){
@@ -336,7 +338,7 @@ function compareHTML(){
    const bits=[]; if(n.up)bits.push(n.up+' stronger'); if(n.down)bits.push(n.down+' lower'); if(n.none)bits.push(n.none+' not offered');
    return `<div class="acc" id="acc${i}">
    <button type="button" onclick="document.getElementById('acc${i}').classList.toggle('open')">
-     <span>${c.p}</span><span class="cnt">${bits.join(', ')}, tap to open</span></button>
+     <span>${c.p}</span><span class="cnt">${bits.length?bits.join(', ')+', tap to open':'3 points to compare, tap to open'}</span></button>
    <div class="panel"><table>
      <tr><th>Benefit</th><th>How Tier One compares</th></tr>
      ${c.rows.map(r=>`<tr class="${r[2]}"><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}
@@ -349,8 +351,8 @@ const steps = [
 /* 0 INTRO + VO */
 {type:'intro'},
 /* 1 Lesson 1 */
-{af:'l1', eyebrow:'The Big Picture', h:'Tier One is part of the Aflac family', lead:'When you enroll or write Tier One business, you’re still selling Aflac.',
- html:`<div class="body"><p>Tier One Insurance Company is a <span class="hl">subsidiary of Aflac Incorporated</span>, one of the underwriting companies inside the Aflac family of insurers. Same parent company. Same brand behind the products. Tier One is simply the part of Aflac built for the <span class="hl">direct and digital channel</span>.</p></div>
+{af:'l1', eyebrow:'The Big Picture', h:'Tier One is part of the Aflac family', lead:'When you enroll or write Tier One business, you are selling coverage issued by Tier One Insurance Company, a member of the Aflac family of insurers.',
+ html:`<div class="body"><p>Tier One Insurance Company is a <span class="hl">subsidiary of Aflac Incorporated</span>, one of the underwriting companies within the Aflac family of insurers. Same parent company. Same brand behind the products. Tier One is simply the part of Aflac built for the <span class="hl">direct and digital channel</span>.</p></div>
  <p class="note" style="color:var(--slate);font-size:13px">Tap each company to see its role:</p>
  <div class="tree">
    <div class="parent">Aflac Incorporated</div>
@@ -361,7 +363,7 @@ const steps = [
      <div class="node t1" role="button" tabindex="0" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}"><div class="nm">Tier One ★</div><div class="role">The direct and digital company, the one in your hands for this pilot.</div></div>
    </div>
  </div>
- <div class="callout">If a customer asks “who’s Tier One?” your answer is easy and true: <strong>It’s Aflac. The part of Aflac built for individuals outside the workplace.</strong></div>`},
+ <div class="callout">If a customer asks who Tier One is, explain that <strong>Tier One Insurance Company is a subsidiary of Aflac Incorporated and a member of the Aflac family of insurers</strong> that offers products through the direct and digital channel.</div>`},
 /* 2 Lesson 2 */
 {eyebrow:'Why It’s Different', af:'l2', h:'Built for a different market', lead:'Aflac is best known for its products at the worksite. Tier One was designed for direct and digital sales outside the workplace.',
  html:`<div class="cols">
@@ -369,7 +371,7 @@ const steps = [
    <div class="mini"><h4>${I.globe} What Tier One was built for</h4><ul><li>Direct sales to individuals</li><li>Digital direct and embedded partnerships</li><li>Online, anytime, on any device</li></ul></div>
  </div>
  <div class="callout">The same platform Aflac’s partners use is now yours. Partners like <strong>USAA</strong> use Aflac’s technology to cross sell coverage online. Tier One brings that same buy flow to your direct sales.</div>
- <div class="callout"><strong>“I already have an Aflac policy at work. Can I have both?”</strong> Yes, even the same product. Tier One is a separate company inside the Aflac family, so a customer can have an Accident policy with Aflac Columbus and another with Tier One, and receive benefits on both if eligible. One rule to remember: never suggest anyone cancel or replace worksite coverage to buy Tier One.</div>
+ <div class="callout"><strong>“I already have an Aflac policy at work. Can I have both?”</strong> Yes, even the same product. Tier One is a separate company within the Aflac family, so a customer can have an Accident policy with Aflac Columbus and another with Tier One and receive benefits on both if eligible. One rule to remember: never suggest anyone cancel or replace worksite coverage to buy Tier One.</div>
  <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Drag each item into the right column, or tap an item, then tap a column:</p>
  <div class="sort" id="sortbins">
    <div class="bin" data-bin="ws"><h4>Worksite</h4></div>
@@ -389,14 +391,14 @@ const steps = [
  <div class="callout" style="margin-top:12px">Two views, one platform: the <strong>self service portal</strong> is where your customer enrolls and manages their own coverage. The <strong>customer service portal</strong> is the back office view.</div>
  <p class="note" style="font-size:12px;color:var(--slate);margin-top:8px">Video not loading here? Open it directly: <a href="${VIDEO_URL}#t=0,141" target="_blank" rel="noopener">Self Service Portal (0:00 to 2:21)</a> &nbsp;|&nbsp; <a href="${VIDEO_URL}#t=142" target="_blank" rel="noopener">Customer Service Portal</a>.</p>`},
 /* 3 Lesson 3 */
-{af:'l3', eyebrow:'Plan Designs', h:'Same product lines, different benefits', lead:'Tier One sells the same four product lines you know. The benefits inside them are different. Some pay more than the worksite plan. Some are not included at all.',
- html:`<div class="callout"><strong>What stays the same:</strong> the same four lines, Accident, Cancer, Critical Illness and Dental. Benefits are paid based on the treatment received. And you are still placing business inside the Aflac family.</div>
+{af:'l3', eyebrow:'Plan Designs', h:'Same product lines, different benefits', lead:'Tier One offers four product lines you already know. The benefits for each product are different. Some pay more than the worksite plan. Some are not included at all.',
+ html:`<div class="callout"><strong>What stays the same:</strong> the same four lines, Accident, Cancer, Critical Illness and network Dental. Benefits are paid based on the treatment received. And you are still placing business with the Aflac family.</div>
  <div class="cols">
-   <div class="mini win"><h4>${I.check} Where Tier One is stronger</h4><ul><li><strong>Critical Illness pays the spouse or child 100% of the initial diagnosis benefit.</strong> The worksite plan pays them 50%. On a family case this is your strongest story.</li><li>The Critical Illness <strong>face amount grows automatically each year</strong> until the initial diagnosis benefit is paid or the 10th policy anniversary date of coverage.</li><li><strong>Accident pays more</strong> on hospitalization, ICU, treatment, diagnostic exam, follow up and therapy.</li><li>The optional <strong>ADD rider is substantially larger</strong> at both adult and child level.</li><li><strong>Cancer hospitalization pays more</strong> at every level, days 1 to 30 and beyond.</li></ul></div>
-   <div class="mini watch"><h4>${I.alert} Where Tier One is more limited</h4><ul><li><strong>No Accidental Death benefit</strong> on Critical Illness</li><li>Accident <strong>drops six benefits</strong> the worksite plan has: wellness or screening, transportation, lodging, prosthesis, blood and plasma, family support</li><li><strong>Cancer initial diagnosis</strong> pays less than the worksite plan</li></ul></div>
+   <div class="mini win"><h4>${I.check} Where Tier One is stronger</h4><ul><li><strong>Critical Illness pays the spouse or child 100% of the initial diagnosis benefit.</strong> The worksite plan pays them 50%. This may be an important consideration for those seeking family coverage.</li><li>The Critical Illness <strong>face amount grows automatically each year</strong> until the initial diagnosis benefit is paid or the 10th policy anniversary date of coverage.</li><li><strong>Accident pays more</strong> on hospitalization, ICU, treatment, diagnostic exam, follow up and therapy.</li><li>The optional <strong>ADD rider is substantially larger</strong> at both adult and child level.</li><li><strong>Cancer hospitalization pays more</strong> at every level, days 1 to 30 and beyond.</li></ul></div>
+   <div class="mini watch"><h4>${I.alert} Where Tier One is more limited</h4><ul><li><strong>No Accidental Death benefit</strong> on Critical Illness</li><li>Accident <strong>drops six benefits</strong> the worksite plan has: wellness or screening, transportation, lodging, prosthesis, blood and plasma, family support</li><li>Accident has <strong>limits on the number of initial treatment benefits</strong> payable per policy per year</li><li><strong>Cancer initial diagnosis</strong> pays less than the worksite plan</li></ul></div>
  </div>
- <div class="callout"><strong>Dental: use the network dental plan as your reference point.</strong> Tier One dental works the way the network dental plan you trained on works, not like the old worksite dental. Benefits are paid to the dental provider, not the policyholder, and waiting periods apply: preventive from day one, basic and major services wait several months. The specific deductibles, maximums and waits are Tier One’s own. Confirm them in the outline of coverage.</div>
- <div class="warn"><strong>Underwriting is tighter than you may be used to.</strong> Tier One is direct business, so the application asks more than a worksite enrollment does. As one example, the cancer free look back runs 10 years rather than 5. Read the actual questions on the Tier One application before you tell someone they will qualify.</div>
+ <div class="callout"><strong>Dental: use the network dental plan as your reference point.</strong> Tier One dental works the way the network dental plan you trained on works, not like the old worksite dental. Benefits are paid to the dental provider in most cases and waiting periods apply: preventive from day one, basic and major services wait several months. The specific deductibles, maximums and waits are Tier One’s own, as are the services covered. Confirm them in the outline of coverage.<br><span style="display:block;margin-top:8px">Policyholders are not restricted to use of Aflac’s dental network, although they can reduce out-of-pocket costs by using in-network providers. If using a provider that’s not in-network, the provider can file the claim, or the policyholder can pay out of pocket and file a claim for reimbursement.</span></div>
+ <div class="warn"><strong>Underwriting is tighter than you may be used to.</strong> Tier One is direct business, so the application asks more than a worksite enrollment does. As one example, the cancer free look back runs 10 years rather than 5. Read the actual questions on the Tier One application before you tell someone they are likely to qualify, and never promise an outcome.</div>
  <p class="note" style="font-size:13px;color:var(--slate);margin-top:18px"><strong>Product by product.</strong> Open each one and look at where the rows turn green, orange and red:</p>
  ${compareHTML()}
  <div class="srcnote">${COMPARE_SRC}</div>
@@ -404,11 +406,11 @@ const steps = [
  <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">True or False? Tap your answer:</p>
  <div id="sd"></div>`},
 /* 4 Lesson 4 */
-{af:'l4', eyebrow:'Important', h:'If they ask a product question, check the materials first', lead:'When a friend or family member asks something product specific, review the Tier One brochures and materials before you answer.',
+{af:'l4', eyebrow:'Important', h:'If they ask a product question, check the materials first', lead:'When a friend or family member asks something product specific, review the Tier One sales and marketing materials before you answer.',
  html:`<div class="steps" style="grid-template-columns:repeat(3,1fr)">
    <div class="step"><div class="n">1</div><h4>Pause</h4><p>Don’t answer product specifics from memory. The amounts can differ.</p></div>
-   <div class="step"><div class="n">2</div><h4>Open the materials</h4><p>Pull up the Tier One brochure or outline of coverage.</p></div>
-   <div class="step"><div class="n">3</div><h4>Then answer</h4><p>Confirm it matches Tier One, then answer with confidence.</p></div>
+   <div class="step"><div class="n">2</div><h4>Open the materials</h4><p>Pull up the Tier One sales and marketing materials or outline of coverage.</p></div>
+   <div class="step"><div class="n">3</div><h4>Then answer</h4><p>Confirm the information for Tier One, then answer with confidence.</p></div>
  </div>
  <div style="text-align:center;margin-top:18px"><button class="btn" type="button" onclick="openMaterials()">Open the Tier One materials</button></div>
  <div class="mini" style="margin-top:18px"><h4>${I.doc} Scenario</h4><p style="font-size:14.5px;margin:0 0 10px">A friend asks what your dental covers for a crown. What’s your move?</p><div id="scen"></div></div>`},
@@ -416,11 +418,11 @@ const steps = [
 {af:'l5', eyebrow:'The Pilot Playbook', h:'How to get paid', lead:'You stay the trusted advisor; the platform handles the purchase and the credit.',
  html:`<div class="steps">
    <div class="step"><div class="n">1</div><h4>Promote & discuss</h4><p>Talk about Aflac and why protection matters.</p></div>
-   <div class="step"><div class="n">2</div><h4>Share your FastTrack link</h4><p>Drop your personal FastTrack QR code or link where your people are.</p></div>
-   <div class="step"><div class="n">3</div><h4>They buy online</h4><p>Your customer completes the buy flow themselves.</p></div>
+   <div class="step"><div class="n">2</div><h4>Share your FastTrack link</h4><p>Share your personal FastTrack QR code or link with the people you know.</p></div>
+   <div class="step"><div class="n">3</div><h4>They buy online</h4><p>Your customer completes the application process themselves.</p></div>
    <div class="step"><div class="n">4</div><h4>It tracks to you</h4><p>Credits your writing number & 01 hierarchy.</p></div>
  </div>
- <div class="good"><strong>${I.cash.replace('class="ic"','class="ic" style="vertical-align:middle"')} The money:</strong> Full production credit (applied <em>manually</em> during the pilot) <strong>plus a one time $200</strong> per issued policy, paid about 3 business days after issue. A policy issues when payment is collected.<br><span style="font-size:13px;font-weight:400">This is a <strong>one time bonus, not a commission</strong>. There is no renewal and no stock. You're the advisor and connector; think of it like the per diem an agent gets for a broker enrollment.</span></div>
+ <div class="good"><strong>${I.cash.replace('class="ic"','class="ic" style="vertical-align:middle"')} The money:</strong> Full production credit (applied <em>manually</em> during the pilot) <strong>plus a one time $200</strong> per issued policy, paid about 3 business days after issue.<br><span style="font-size:13px;font-weight:400">A policy is considered issued once all issue requirements are met and the initial premium is collected. If a policy is subsequently rescinded, cancelled during the applicable free-look period, or refunded, any production credit, bonus payment, or other compensation associated with that policy may be reversed in accordance with the pilot rules and applicable compensation guidelines.</span><br><span style="font-size:13px;font-weight:400">This is a <strong>one time bonus, not a commission</strong>. There is no renewal and no stock. You're the advisor and connector; think of it like the per diem an agent gets for a broker enrollment.</span></div>
  <div class="calc">
    <div class="sub">Drag to see what your first month can produce</div>
    <input type="range" id="calcr" min="0" max="20" value="10" oninput="calcUpd(this.value)">
@@ -440,7 +442,7 @@ const steps = [
      <label>Fast Start AP $<input type="number" id="calcfs" value="5000" min="0" style="width:72px" oninput="calcUpd(document.getElementById('calcr').value)"></label>
      <label>Super FS AP $<input type="number" id="calcsfs" value="15000" min="0" style="width:72px" oninput="calcUpd(document.getElementById('calcr').value)"></label>
    </div>
-   <p class="note" style="font-size:11px;margin-top:6px;color:var(--slate)">*Estimate. Fast Start $5,000 AP and Super Fast Start $15,000 AP are 2025 Triple Crown First Year Series figures and may change. Confirm current criteria on One Aflac. Avg AP/policy is an editable assumption.</p>
+   <p class="note" style="font-size:11px;margin-top:6px;color:var(--slate)">*Estimate. Fast Start $5,000 AP and Super Fast Start $15,000 AP use current program criteria, which are subject to change. Confirm current criteria on One Aflac. Avg AP/policy is an editable assumption.</p>
  </div>`},
 /* 6 Lesson 6 */
 {af:'l6', eyebrow:'The Rules', h:'The rules that keep your FastTrack link on', lead:'Because the pilot pays a flat bonus instead of a commission, a few rules protect the program and your link.',
@@ -454,7 +456,7 @@ const steps = [
 /* 7 Lesson 7 */
 {af:'l7', eyebrow:'Compliance', h:'How you talk about & market Tier One', lead:'Selling insurance is a privilege with rules. They protect your customers, your link, and your career.',
  html:`<div class="cols">
-   <div class="mini"><h4>${I.shield} Always</h4><ul><li>Say it’s <strong>limited benefit supplemental</strong>, not major medical or ACA</li><li>If they have Aflac at work, they <strong>can hold both</strong>: each policy pays its own benefits</li><li>Use <strong>approved materials & your approved link</strong> only</li><li>Name the insurer truthfully (Tier One Insurance Company)</li><li>Sell only where you’re <strong>licensed & appointed</strong></li></ul></div>
+   <div class="mini"><h4>${I.shield} Always</h4><ul><li>For Accident, Cancer, and Critical Illness products, explain that they are <strong>limited-benefit supplemental insurance</strong> and are not major medical insurance or ACA coverage</li><li>Describe <strong>Dental</strong> coverage according to the approved policy materials and applicable disclosures</li><li>If they have Aflac at work, they <strong>can hold both</strong>: each policy pays its own benefits</li><li>Use <strong>approved materials & your approved link</strong> only</li><li>Name the insurer truthfully (Tier One Insurance Company)</li><li>Sell only where you’re <strong>licensed & appointed</strong></li></ul></div>
    <div class="mini"><h4>${I.alert} Never</h4><ul><li>Misrepresent or exaggerate benefits</li><li>Guarantee a claim will be paid</li><li>Offer cash/gifts to induce a sale (rebating)</li><li>Push a switch by disparaging existing coverage</li><li>Suggest canceling worksite coverage to buy Tier One</li></ul></div>
  </div>
  <p class="note" style="font-size:13px;color:var(--slate);margin-top:16px">Compliant or a violation? Tap to check:</p>
@@ -486,11 +488,11 @@ const STATE = { sort:{}, sd:{}, onoff:{}, comp:{}, scen:null, go:{}, calc:{apps:
    -------------------------------------------------------------------------- */
 const MATERIALS=[
  {t:"Tier One outline of coverage", d:"The controlling benefit document. Aflac has not published this yet. It is listed as “Coming Soon” on the agent portal. Confirm every specific benefit amount here once it's live; ask your DSC only as an interim source in the meantime.", url:"", pend:"Not yet published"},
- {t:"Tier One product brochures & training", d:"Product pages and training decks for Accident, Cancer and Critical Illness on Aflac's Sell Direct agent portal. Dental has no page yet. Aflac lists it as a coming revision, so there is no Tier One Dental brochure to link to today.", url:"https://www.aflac.com/sell-direct/default.aspx"},
+ {t:"Tier One product materials & training", d:"Product pages and training decks for Accident, Cancer and Critical Illness on Aflac's Sell Direct agent portal. Dental has no page yet. Aflac lists it as a coming revision, so there is no Tier One Dental brochure to link to today.", url:"https://www.aflac.com/sell-direct"},
  {t:"Tier One direct site", d:"The customer facing buy flow your personal link points into. Useful for seeing exactly what your contact sees.", url:"https://go.tieronedirect.com/"},
  {t:"Your personal FastTrack QR code and link", d:"Issued to you for the pilot. If you do not have yours yet, ask your DSC.", url:""},
  {t:"One Aflac", d:"Current Triple Crown criteria, including the Fast Start and Super Fast Start thresholds and award amounts.", url:""},
- {t:"Approved marketing materials", d:"The only assets you may post or send. Anything you make yourself counts as unapproved advertising. The product pages and decks on Aflac's Sell Direct portal are approved source material.", url:"https://www.aflac.com/sell-direct/default.aspx"}
+ {t:"Approved marketing materials", d:"The only assets you may post or send. Anything you make yourself counts as unapproved advertising. The product pages and decks on Aflac's Sell Direct portal are approved source material.", url:"https://www.aflac.com/sell-direct"}
 ];
 
 /* ---------- STALE NARRATION GATE ----------
@@ -509,42 +511,43 @@ const AUDIO_PENDING={
 const TRANSCRIPTS={
  "cold-open":[
   "Welcome to the FastTrack Program pilot. If you're hearing this, you're one of the first people in the field force to sell Tier One products, so let's get you ready to do it well.",
-  "Here's the plan for the next twenty minutes or so. We'll cover what Tier One is, the few real differences from the worksite business you already know, how the pilot works and how it pays you, the rules that keep your link active, and how to stay compliant. Let's get started."
+  "Here's the plan, for the next twenty minutes or so. We'll cover what Tier One is, the few real differences from the worksite business you already know, how the pilot works and how it pays you, the rules that keep your link active, and how to stay compliant. Let's get started."
  ],
  l1:[
-  "Let's start with the most important point. When you enroll or write Tier One business, you are still selling Aflac. Tier One Insurance Company is a subsidiary of Aflac Incorporated. It's one of the underwriting companies inside the Aflac family, right alongside American Family Life of Columbus, Aflac New York, and Continental American.",
+  "Let's start with the most important point. When you enroll or write Tier One business, you are still selling Aflac. Tier One Insurance Company is a subsidiary of Aflac Incorporated. It's one of the underwriting companies that are part of the Aflac family, right alongside American Family Life of Columbus, Aflac New York, and Continental American.",
   "Same parent company. Same brand behind the products. Tier One is simply the part of Aflac built for the direct and digital channel.",
-  "So if someone asks who Tier One is, the answer is simple, and it's true. It's Aflac. It's the part of Aflac built for individuals outside the workplace."
+  "If a customer asks who Tier One is, explain that Tier One Insurance Company is part of the Aflac family of insurers and specializes in direct and digital distribution.",
+  "Always identify the issuing insurer accurately."
  ],
  l2:[
   "So why does Tier One exist? Because it was built for a different market than the worksite.",
   "Think about where the field has spent its time. The worksite. Employer groups, payroll deduction, in person at open enrollment. That model works well, and it isn't the only one.",
   "Tier One was built for direct sales to individuals. Online, any time, on any device, with no employer and no enrollment window required. That's actually where Aflac started, with direct, person to person selling. This pilot brings that back through modern technology, and it's the first time Tier One has been in the field's hands.",
-  "The technology is already proven. The same platform Aflac's partners use is now yours. Partners like USAA use Aflac's technology to offer this coverage online, and Tier One brings that same buy flow to your own direct sales.",
+  "The technology is already in use. The same platform Aflac's partners use is now yours. Partners like USAA use Aflac's technology to offer this coverage online, and Tier One brings that same buy flow to your own direct sales.",
   "You don't build the site, and you don't process the application. The platform does that. Your work happens before the click."
  ],
  l3:[
-  "Now the products. Tier One covers the same lines you know from Aflac: Accident, Cancer, Critical Illness, and Dental. Benefits are paid based on the treatment received. But the benefits inside each product are different. Some Tier One benefits pay more than the worksite plan. Some are not included at all.",
+  "Now the products. Tier One covers the same lines you know from Aflac: Accident, Cancer, Critical Illness, and Dental. Benefits are paid based on the treatment received. But the benefits of each product are different. Some Tier One benefits pay more than the worksite plan. Some are not included at all.",
   "Start with Critical Illness, because this is your strongest story. On the worksite plan, a covered spouse or child receives fifty percent of the initial diagnosis benefit. On Tier One, they receive one hundred percent, the same as the primary insured. On a family case that is a significant difference, and you should lead with it. Tier One Critical Illness also increases the face amount automatically each year until the initial diagnosis benefit is paid or the tenth policy anniversary date of coverage, and cancer can be added as a covered condition.",
   "The trade off on Critical Illness is that there is no Accidental Death benefit on the Tier One plan at all. The worksite plan has one. Know that before someone asks.",
-  "On Accident, the daily and treatment amounts are generally higher on Tier One. Hospitalization pays more per day. Intensive care pays more at the top end. Follow up treatment, therapy, and the major diagnostic exam all pay more. The optional accidental death and dismemberment rider is substantially larger than the worksite version, at both the adult and the child level.",
+  "On Accident, the daily and treatment amounts are generally higher on Tier One. Hospitalization pays more per day. Intensive care pays more at the top end. Follow up treatment, therapy, and the major diagnostic exam all pay more. The optional accidental death and dismemberment rider is substantially larger than the worksite version, at both the adult and the child level. Accident also has limits on the number of initial treatment benefits payable per policy per year.",
   "But Tier One Accident also drops six benefits the worksite plan includes. There is no wellness or health screening benefit. No transportation benefit. No lodging benefit. No prosthesis benefit, no blood and plasma benefit, and no family support benefit. If your customer is used to the worksite accident plan, those absences are what they will notice, so raise them yourself rather than letting them find out at claim time.",
   "Cancer is a mix. The initial diagnosis benefit runs lower on Tier One. But hospitalization pays meaningfully more, at every level, both for the first thirty days and beyond.",
-  "Dental is the one to be most careful with. Use the network dental plan you trained on as your reference point, not the old worksite dental. Like the network plan, Tier One dental benefits are paid to the dental provider, not to the policyholder, and waiting periods apply, with preventive care from day one but basic and major services waiting several months. The specific deductibles, maximums and waits are Tier One's own, so confirm them in the outline of coverage before you quote anything.",
-  "And one thing that catches newer associates. Because Tier One is direct business, the underwriting is tighter than a worksite enrollment. The application asks more, and it looks back further. As one example, the cancer free look back runs ten years instead of five. Read the actual questions before you tell someone they will qualify, and never promise an outcome.",
+  "Dental is the one to be most careful with. Use the network dental plan you trained on as your reference point, not the old worksite dental. Like the network plan, Tier One dental benefits are paid to the dental provider in most cases, and waiting periods apply, with preventive care from day one but basic and major services waiting several months. The specific deductibles, maximums and waits are Tier One's own, as are the services covered, so confirm them in the outline of coverage before you quote anything. Policyholders are not restricted to use of Aflac's dental network, although they can reduce out of pocket costs by using in network providers. If using a provider that's not in network, the provider can file the claim, or the policyholder can pay out of pocket and file a claim for reimbursement.",
+  "And one thing that catches newer associates. Because Tier One is direct business, the underwriting is tighter than a worksite enrollment. The applications for Cancer and Critical Illness ask more and look back further. As one example, the cancer free look back runs ten years instead of five. Read the actual questions before you tell someone they are likely to qualify, and never promise an outcome.",
   "So build this habit. The product names are the same, but the numbers are different. Open the Tier One materials, confirm the specific benefit for the specific plan and tier, and then answer.",
  ],
  l4:[
-  "Here's the one habit to build from day one. If a friend or family member asks you a product specific question, review the Tier One brochures and materials first, before you answer.",
-  "You don't need to memorize every detail. You do need to make sure that what you tell someone matches the actual Tier One product, because the amounts and a few of the rules are different from the worksite.",
-  "So when a real question comes up, open the Tier One brochure or the outline of coverage, confirm it, and then answer with confidence. That one habit keeps you accurate, it keeps your customer's trust, and it keeps you compliant."
+  "Here's the one habit to build from day one. If a friend or family member asks you a product specific question, review the Tier One sales and marketing materials first, before you answer.",
+  "You don't need to memorize every detail. You do need to make sure that what you tell someone is accurate for the Tier One product, because the amounts and a few of the rules are different from the worksite.",
+  "So when a real question comes up, open the Tier One sales materials or outline of coverage, confirm it, and then answer with confidence. That one habit keeps you accurate, it keeps your customer's trust, and it keeps you compliant."
  ],
  l5:[
   "So how does this work, and how do you get paid? Here's the playbook, in four simple steps.",
-  "One, promote and discuss. Talk about Aflac and why protection matters with the people already in your circle. Two, share your FastTrack link. You get a personal FastTrack QR code and a unique FastTrack link. Put it wherever your people are. Three, they buy online. Your contact completes the Tier One buy flow themselves. There's no agent entry. They do their own application. And four, it tracks back to you. The sale credits your writing number and rolls up your hierarchy, just like the rest of your business.",
+  "One, promote and discuss. Talk about Aflac and why protection matters with the people already in your circle. Two, share your FastTrack link. You get a personal FastTrack QR code and a unique FastTrack link. Put it wherever your people are. Three, they buy online. Your contacts complete the Tier One application process themselves. There's no agent entry. They do their own applications. And four, it tracks back to you. The sale credits your writing number and rolls up your hierarchy, just like the rest of your business.",
   "So your role is clear. You're the advisor and the connector. You start the conversation, and the platform completes the sale.",
   "Now, how it pays. Three things. First, you earn full production credit on every sale, and that credit counts toward your Traditional production. During the pilot it's applied manually, so it won't post on its own, but it is tracked and applied for you.",
-  "Second, on top of that credit, you get a one time, two hundred dollar bonus for every policy that issues, paid within about three business days. A policy issues once payment is collected. So this is real money, and it's fast.",
+  "Second, on top of that credit, you get a one time, two hundred dollar bonus for every policy that issues, paid within about three business days. A policy is considered issued once all issue requirements are met and the initial premium is collected. So this is real money, and it's fast.",
   "And third, it counts toward your bonuses. Because your Tier One production counts toward your Traditional annualized premium, it helps you reach the new associate milestones in the Triple Crown series. Fast Start is five thousand dollars of premium in your first four weeks. Super Fast Start is fifteen thousand in your first eight weeks. Those are the first two rungs of a ladder that, across your first year, can pay out around thirteen thousand dollars in bonuses. Tier One sales help you climb it faster. Award amounts and rules can change, so check the current criteria on One Aflac.",
   "Here's the simple goal to start. Ten apps in your first thirty days. That's two thousand dollars in fast cash, real production credit, and real momentum toward Fast Start, while you're still learning the business."
  ],
@@ -553,16 +556,16 @@ const TRANSCRIPTS={
   "Rule one. Keep your business on the books. If five or more of your policies lapse during the pilot, your FastTrack link is turned off. If the pilot is extended, the same rule applies to lapses within one hundred twenty days of issue. The way to stay clear of that is simple. Write real coverage to real people who want it and intend to keep it.",
   "Rule two. This is a pilot, and it runs for ninety days. Aflac is monitoring how the business performs, and it reserves the right to turn off any link at any time if activity looks irregular. Your link is a pilot privilege, so make the most of the time.",
   "Rule three. If claims activity looks unusual, or there's any sign of fraud, Aflac can turn a link off while it reviews. That protects the pilot for everyone in it.",
-  "None of this should worry you. Every one of these is in your control. Sell honestly, sell people who want the coverage, keep it on the books, and your link stays active."
+  "Most of these requirements are straightforward. Follow company policies, use approved materials, market responsibly, and focus on helping consumers evaluate whether the coverage meets their needs. Doing so helps support continued participation in the pilot."
  ],
  l7:[
   "Last lesson, and it's the one that protects your license and your bonuses. Here are the rules that matter most.",
   "First, never misrepresent Tier One products. Don't exaggerate benefits, don't skip over the limitations, and don't make a misleading comparison. Describe what the policy actually does.",
-  "Second, always be clear that it's supplemental. Tier One health products are limited benefit supplemental insurance. They are not major medical, not minimum essential coverage, and not a replacement for comprehensive or ACA health insurance. Never let anyone believe otherwise.",
+  "Second, always be clear that the accident, cancer and critical illness plans are supplemental. Tier One health products are limited benefit supplemental insurance. They are not major medical, not minimum essential coverage, and not a replacement for comprehensive or ACA health insurance. Never let anyone believe otherwise.",
   "Third, use approved materials only. Market with your approved link and approved messaging. No homemade flyers, no edited screenshots, no changing the numbers. A social post, a text, a direct message, your bio link, all of that counts as advertising, and all of it has to match what's approved.",
   "Fourth, name the company truthfully. It's Tier One Insurance Company, and in California, Tier One Life Insurance Company, a subsidiary of Aflac Incorporated. Don't suggest it's an unaffiliated company, and never imply a government agency endorses it.",
   "Now two rules that protect your contest and bonus qualification. Giving, splitting, or receiving business just to qualify for a contest is strictly prohibited. Aflac investigates suspected manipulation, and it can mean disqualification, or even a chargeback of an award you already received. And keep your no pay rate at or under thirteen point zero four percent. That rate is just the share of your policies that never get paid, so the way you protect it is the same thing that keeps your link on. Write business to people who keep it.",
-  "A few more, quickly. Only sell where you're licensed and appointed, and the customer's home state is what counts. Never guarantee that a claim will be paid, because benefits pay according to the policy. Don't offer cash or gifts to get someone to sign up. Don't run down someone's existing coverage to make a switch, and never tell anyone to drop their major medical for a supplemental plan. Recommend only what fits the person. Protect their personal information. And keep your own story truthful.",
+  "A few more, quickly. Only sell where you're licensed and appointed, and the customer's home state is what counts. Never guarantee that a claim will be paid, because claims are reviewed according to the policy. Don't offer cash or gifts to get someone to sign up. Don't run down someone's existing coverage to make a switch, and never tell anyone to drop their major medical for a supplemental plan. Recommend only what fits the person. Protect their personal information. And keep your own story truthful.",
   "Follow these, and you build exactly the kind of trusted reputation this pilot runs on."
  ],
  "get-started":[
@@ -576,30 +579,30 @@ const TRANSCRIPTS={
 /* ---------- INTERACTION DATA ---------- */
 const sortItems=[{t:'Payroll deduction',b:'ws'},{t:'Buy online anytime',b:'t1'},{t:'Open enrollment window',b:'ws'},{t:'Personal FastTrack QR / link',b:'t1'},{t:'Employer groups',b:'ws'},{t:'Direct to individuals',b:'t1'}];
 const sdItems=[
- {q:'Tier One covers the same product lines as the worksite plan: Accident, Cancer, Critical Illness, Dental.',a:'True',e:'True. Tier One sells the same four product lines. The benefits inside each one are different.'},
- {q:'Tier One dental benefits are paid directly to the policyholder.',a:'False',e:'False. Tier One dental pays the dental provider, not the policyholder, the same way as the network dental plan you trained on. Never describe it like the old worksite dental.'},
+ {q:'Tier One covers the same product lines as the worksite plan: Accident, Cancer, Critical Illness, network Dental.',a:'True',e:'True. Tier One sells the same four product lines. The benefits for each policy are different.'},
+ {q:'Tier One dental benefits are always paid directly to the policyholder.',a:'False',e:'False. Tier One dental pays the dental provider, not the policyholder unless the policyholder is filing for an out-of-network reimbursement. Never describe it like the old worksite dental.'},
  {q:'Tier One dental has no waiting period.',a:'False',e:'False. Tier One dental has waiting periods, like the network dental plan. Preventive is day one; basic and major wait several months. Confirm the exact wait in the outline of coverage.'},
- {q:'Tier One Accident covers the same list of benefits as the worksite plan.',a:'False',e:'False. Tier One Accident drops six of them: wellness or health screening, transportation, lodging, prosthesis, blood and plasma, and family support. Raise those yourself rather than letting a customer find out at claim time.'},
- {q:'Tier One Accident pays less per day for a hospital stay than the worksite plan.',a:'False',e:'False, in your favor. Tier One pays more per day than the worksite plan does.'},
+ {q:'Tier One Accident covers the same list of benefits as the worksite plan.',a:'False',e:'False. Tier One Accident drops six benefits: wellness or health screening, transportation, lodging, prosthesis, blood and plasma, and family support. Point that out yourself rather than letting a customer find out at claim time.'},
+ {q:'Tier One Accident pays less per day for a hospital stay than the worksite plan.',a:'False',e:'False, in the customer’s favor. Tier One pays more per day than the worksite plan does.'},
  {q:'The Tier One Critical Illness plan includes an Accidental Death benefit.',a:'False',e:'False. There is no Accidental Death benefit on the Tier One Critical Illness plan. The worksite plan has one; Tier One does not.'},
  {q:'On Tier One Critical Illness, a covered spouse gets the same initial diagnosis benefit as the primary insured.',a:'True',e:'True, and in your customer’s favor. Tier One pays 100% of the initial diagnosis benefit for EVERY covered person. (The worksite plan is the one that treats them differently. It pays 100% for the primary insured and only 50% for a spouse or dependent.)'},
- {q:'You are still placing business inside the Aflac family of insurers when you sell Tier One.',a:'True',e:'True. Tier One Insurance Company is a subsidiary of Aflac Incorporated. That does not change.'},
- {q:'Tier One underwriting questions match what you see on a worksite enrollment.',a:'False',e:'False. Tier One is direct business and underwrites more tightly. The cancer free look back runs 10 years rather than 5, for example. Read the actual application questions before you promise anyone they will qualify.'}
+ {q:'You are still placing business with the Aflac family of insurers when you sell Tier One.',a:'True',e:'True. Tier One Insurance Company is a subsidiary of Aflac Incorporated. That does not change.'},
+ {q:'Tier One underwriting questions match what you see on a worksite enrollment.',a:'False',e:'False. Tier One is direct business and underwrites more tightly. The cancer free look back runs 10 years rather than 5, for example. Read the actual application questions before you tell anyone they are likely to qualify, and never promise an outcome.'}
 ];
 const scenOpts=[
  {t:'Answer from memory with the worksite figures',ok:false,e:'No. The amounts can differ. Don’t answer product specifics from memory.'},
- {t:'Review the Tier One brochure / outline of coverage first, then answer',ok:true,e:'Yes. Check the Tier One materials, then answer with confidence.'},
+ {t:'Review the Tier One sales and marketing materials / outline of coverage first, then answer',ok:true,e:'Yes. Check the Tier One materials, then answer with confidence.'},
  {t:'Tell them it’s the same as their old plan',ok:false,e:'No. That risks a misrepresentation.'}
 ];
 const onoffItems=[
  {q:'6 of your policies lapse for nonpayment during the pilot',a:'Turned off',e:'Turned off. 5 or more lapses during the pilot turns the link off.'},
- {q:'You answer a customer’s question about coverage',a:'Stays on',e:'Stays on. Advising and answering questions is exactly your role.'},
+ {q:'You answer a customer’s question about coverage after reviewing appropriate Tier One documents',a:'Stays on',e:'Stays on. Advising and answering questions is exactly your role.'},
  {q:'The pilot ends and Aflac closes the program',a:'Turned off',e:'Turned off. Links are a pilot privilege, and Aflac can turn them off when the program closes.'},
  {q:'Claims activity on your sales looks abnormal',a:'Turned off',e:'Turned off (pending review). Aflac may pause a link while it reviews.'}
 ];
 const compItems=[
- {q:'“This replaces your health insurance, cancel your plan!”',a:'Violation',e:'Violation. It’s supplemental, never a substitute for major medical.'},
- {q:'Sharing your approved link with the supplemental disclosure intact',a:'Compliant',e:'Compliant. Approved materials plus the required disclosure.'},
+ {q:'“This replaces your health insurance, cancel your plan!”',a:'Violation',e:'Violation. It’s never a substitute for major medical.'},
+ {q:'Sharing your approved link with the disclosures intact',a:'Compliant',e:'Compliant. Approved materials plus the required disclosures.'},
  {q:'Editing the benefit numbers in a screenshot to look better',a:'Violation',e:'Violation. Altering figures is misrepresentation and unapproved advertising.'},
  {q:'“I guarantee your claim will be paid.”',a:'Violation',e:'Violation. Never guarantee a claim; benefits pay per policy terms.'},
  {q:'Soliciting a friend in a state where you’re not licensed',a:'Violation',e:'Violation. Only sell where you’re licensed and appointed.'},
@@ -608,11 +611,11 @@ const compItems=[
 const quizQs=[
  {q:'Tier One is best described as:',opts:['A competitor to Aflac','A subsidiary of Aflac Incorporated, built for direct/digital','A worksite payroll product','An ACA major medical plan'],c:1},
  {q:'The cleanest dividing line vs. the worksite line is:',opts:['Underwriting company + distribution channel','Price only','Brand','Benefit amounts only'],c:0},
- {q:'Which of these is true of Tier One benefits?',opts:['Every benefit matches the worksite plan','Dental benefits are not paid directly to the policyholder','Accident carries the same Wellness benefit as the worksite','The plans differ only on price'],c:1},
- {q:'A friend asks a product specific question. You should:',opts:['Answer from memory','Review the Tier One brochures/materials first, then answer','Use the worksite figures','Say it’s the same as the worksite plan'],c:1},
- {q:'Per issued policy during the pilot (beyond credit), you get:',opts:['A commission that can be clawed back','Nothing extra','A one time $200, about 3 business days after issue','A percentage of premium'],c:2},
+ {q:'Which of these is true of Tier One benefits?',opts:['Every benefit matches the worksite plan','Dental benefits are not paid directly to the policyholder unless there’s a claim for reimbursement after using an out-of-network provider','Accident carries the same Wellness benefit as the worksite','The plans differ only on price'],c:1},
+ {q:'A friend asks a product specific question. You should:',opts:['Answer from memory','Review the Tier One sales and marketing materials first, then answer','Use the worksite figures','Say it’s the same as the worksite plan'],c:1},
+ {q:'Per issued policy during the pilot (beyond credit), you get:',opts:['A commission that can be clawed back','Nothing extra','A one-time $200 payment according to the pilot compensation program rules.','A percentage of premium'],c:2},
  {q:'Which can turn a link off? (best answer)',opts:['Answering a coverage question','5 or more policies lapsing during the pilot','Sharing your approved link','Telling your true story'],c:1},
- {q:'Which is compliant when marketing your link?',opts:['“This replaces your health insurance”','Editing benefit figures','Sharing your approved link with the supplemental disclosure','Soliciting where you’re not licensed'],c:2},
+ {q:'Which is compliant when marketing your link?',opts:['“This replaces your health insurance”','Editing benefit figures','Sharing your approved link with the necessary disclosures','Soliciting where you’re not licensed'],c:2},
  {q:'A friend says “guarantee my claim and I’ll sign up.” You:',opts:['Guarantee it to close','Explain you can’t guarantee claims; point to the outline of coverage','Offer them $50','Call it major medical'],c:1},
  {q:'On Tier One Critical Illness, a covered spouse receives:',opts:['50% of the initial diagnosis benefit','100% of the initial diagnosis benefit','No benefit at all','Whatever the worksite plan pays'],c:1},
  {q:'Compared with a worksite enrollment, Tier One underwriting is:',opts:['Identical','Looser, because it is online','Tighter, because it is direct business','Waived for friends and family'],c:2},
@@ -654,7 +657,7 @@ function render(){
 function introHTML(){
  return `<div class="eyebrow">FastTrack Program Pilot: Module 1</div>
  <h1>Meet Tier One</h1>
- <p class="lead">Part of the Aflac family of insurers, built for direct and digital sales. A field force orientation for the FastTrack Program pilot.</p>
+ <p class="lead">Part of the Aflac family of insurers, Tier One Insurance Company offers products through direct and digital distribution. This training provides an overview of the FastTrack Program pilot and your responsibilities as a licensed insurance professional.</p>
  <div class="pills"><span class="pill">15 to 20 min</span><span class="pill">7 lessons + live demo</span><span class="pill">Audio with full transcripts</span><span class="pill">Final quiz</span></div>
  <div class="vo">
    <div class="row">
